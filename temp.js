@@ -132,59 +132,70 @@ function Layout() {
   const classes = useStyles();
   return (
     <div>
-      <Grid container sm={12} justifyContent="center" alignItems="center">
-        <Grid sm={12} style={{ padding: '12px' }}>
-          <Paper className={classes.paper}>
-            Description of what is going to happen here
-          </Paper>
+      {/* OUTER CONTAINER */}
+      <Grid container sm={6} justifyContent="center" alignItems="center">
+        {/* CONTAINER TWO */}
+        <Grid item xs={12}>
+          {/* Timeline */}
+          <TimeLine className={classes} />
         </Grid>
-        {/* LEFT SIDE */}
+        {/* CONTAINER ONE */}
         <Grid
-          sm={4}
           item
-          direction="column"
           container
-          alignItems="flex-start"
+          direction="column"
           spacing={4}
           style={{ padding: '12px' }}
         >
-          <Paper className={classes.paper}>
-            <Grid item style={{ padding: '12px', width: '35vh' }}>
-              <Typography variant="h6" component="h1" align="left">
-                From Number
-              </Typography>
-              <PhoneInput
-                defaultCountry="US"
-                placeholder={value}
-                value={value}
-                disabled
-              />
-            </Grid>
-            <Grid item style={{ padding: '12px', width: '35vh' }}>
-              <Typography variant="h6" component="h1" align="left">
-                To Number
-              </Typography>
-              <PhoneInput
-                defaultCountry="US"
-                placeholder="Enter phone number"
-                value={value}
-                onChange={setValue}
-              />
-            </Grid>
-            <Grid item style={{ padding: '12px' }} align="left">
-              <Button
-                variant="contained"
-                color="primary"
-                endIcon={<Icon>send</Icon>}
-              >
-                Send
-              </Button>
-            </Grid>
-          </Paper>
+          <Grid
+            item
+            direction="column"
+            container
+            alignItems="flex-start"
+            xs={12}
+            sm={12}
+          >
+            <Paper className={classes.paper} style={{ width: '50vh' }}>
+              <Grid item style={{ padding: '12px', width: '35vh' }}>
+                <Typography variant="h6" component="h1" align="left">
+                  From Number
+                </Typography>
+                <PhoneInput
+                  defaultCountry="US"
+                  placeholder={value}
+                  value={value}
+                  disabled
+                />
+              </Grid>
+              <Grid item style={{ padding: '12px' }} align="left"></Grid>
+              <Grid item style={{ padding: '12px', width: '35vh' }}>
+                <Typography variant="h6" component="h1" align="left">
+                  To Number
+                </Typography>
+                <PhoneInput
+                  defaultCountry="US"
+                  placeholder="Enter phone number"
+                  value={value}
+                  onChange={setValue}
+                />
+              </Grid>
+              <Grid item style={{ padding: '12px' }} align="left">
+                <Button
+                  variant="contained"
+                  color="primary"
+                  endIcon={<Icon>send</Icon>}
+                >
+                  Send
+                </Button>
+              </Grid>
+            </Paper>
+          </Grid>
         </Grid>
-        {/* RIGHT SIDE */}
-        <Grid item sm={8} container>
-          <TimeLine className={classes} />
+        {/* CONTAINERE TWO */}
+        <Grid container spacing={4} style={{ padding: '12px' }}>
+          <Grid item xs={12} sm={6}>
+            <Paper className={classes.paper}>Stuff here</Paper>
+          </Grid>
         </Grid>
       </Grid>
     </div>

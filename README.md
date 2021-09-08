@@ -15,3 +15,8 @@ npm install
 cd backend
 npm run dev
 ```
+
+### Libraries:
+
+[material-ui]()
+[react-phone-number-input](https://www.npmjs.com/package/react-phone-number-input)

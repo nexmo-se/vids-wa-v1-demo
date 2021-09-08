@@ -1,6 +1,6 @@
 import Config from '../configs';
 import React, { useEffect, useState } from 'react';
-import { Button, Grid } from '@material-ui/core';
+import { Button, Grid, Paper } from '@material-ui/core';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Icon from '@material-ui/core/Icon';
 import axios from 'axios';
@@ -34,15 +34,16 @@ function SendButton() {
 
   return (
     <div>
-      <Grid container spacing={4}>
-        <Button
-          variant="contained"
-          color="primary"
-          className={classes.button}
-          endIcon={<Icon>send</Icon>}
-        >
-          Send
-        </Button>
+      <Grid item>
+        <Paper className={classes.paper}>
+          <Button
+            variant="contained"
+            color="primary"
+            endIcon={<Icon>send</Icon>}
+          >
+            Send
+          </Button>
+        </Paper>
       </Grid>
     </div>
   );
