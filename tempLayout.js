@@ -347,12 +347,6 @@ function Layout() {
                   <Typography variant="subtitle1" component="subtitle1">
                     From Number
                   </Typography>
-                  <PhoneInput
-                    defaultCountry="US"
-                    placeholder={value}
-                    value="12019758605"
-                    disabled
-                  />
                 </Grid>
                 <Grid
                   item
@@ -362,23 +356,8 @@ function Layout() {
                   <Typography variant="subtitle1" component="subtitle1">
                     To Number
                   </Typography>
-                  <PhoneInput
-                    defaultCountry="US"
-                    placeholder="Enter phone number"
-                    value={value}
-                    onChange={(e) => setValue(e.target.value)}
-                  />
                 </Grid>
-                <Grid item style={{ padding: '12px' }} align="left">
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    endIcon={<Icon>send</Icon>}
-                    onClick={handleSubmit}
-                  >
-                    Send
-                  </Button>
-                </Grid>
+                <Grid item style={{ padding: '12px' }} align="left"></Grid>
               </Paper>
             </Grid>
             {/* LOWER LEFT */}
@@ -395,9 +374,7 @@ function Layout() {
         </Grid>
         {/* RIGHT BODY */}
         <Grid container sm={8} justifyContent="flex-end">
-          <Grid item sm={12}>
-            <TimeLine className={classes} />
-          </Grid>
+          <Grid item sm={12}></Grid>
         </Grid>
       </Grid>
     </div>

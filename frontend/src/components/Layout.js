@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import { Button, Grid, Paper } from '@material-ui/core';
 import Icon from '@material-ui/core/Icon';
+import axios from 'axios';
 import SendButton from './SendButton';
 
 import Timeline from '@material-ui/lab/Timeline';
@@ -12,10 +13,8 @@ import TimelineContent from '@material-ui/lab/TimelineContent';
 import TimelineOppositeContent from '@material-ui/lab/TimelineOppositeContent';
 import TimelineDot from '@material-ui/lab/TimelineDot';
 
-import FastfoodIcon from '@material-ui/icons/Fastfood';
+import Face from '@material-ui/icons/Face';
 import LaptopMacIcon from '@material-ui/icons/LaptopMac';
-import HotelIcon from '@material-ui/icons/Hotel';
-import RepeatIcon from '@material-ui/icons/Repeat';
 import Typography from '@material-ui/core/Typography';
 
 import 'react-phone-number-input/style.css';
@@ -49,56 +48,160 @@ function TimeLine(classes) {
       <TimelineItem>
         <TimelineOppositeContent>
           <Typography variant="body2" color="textSecondary">
-            9:30 am
+            Start
           </Typography>
         </TimelineOppositeContent>
         <TimelineSeparator>
-          <TimelineDot>
-            <FastfoodIcon />
+          <TimelineDot color="secondary" variant="outlined">
+            <Face />
           </TimelineDot>
           <TimelineConnector />
         </TimelineSeparator>
         <TimelineContent>
           <Paper elevation={3} className={classes.primaryTail}>
             <Typography variant="h6" component="h1">
-              Eat
+              User
             </Typography>
-            <Typography>Because you need strength</Typography>
-          </Paper>
-        </TimelineContent>
-      </TimelineItem>
-      <TimelineItem>
-        <TimelineOppositeContent>
-          <Typography variant="body2" color="textSecondary">
-            10:00 am
-          </Typography>
-        </TimelineOppositeContent>
-        <TimelineSeparator>
-          <TimelineDot color="primary">
-            <LaptopMacIcon />
-          </TimelineDot>
-          <TimelineConnector />
-        </TimelineSeparator>
-        <TimelineContent>
-          <Paper elevation={3} className={classes.primaryTail}>
-            <Typography variant="h6" component="h1">
-              Code
-            </Typography>
-            <Typography>Because it&apos;s awesome!</Typography>
+            <Typography>Types Hello</Typography>
           </Paper>
         </TimelineContent>
       </TimelineItem>
       <TimelineItem>
         <TimelineSeparator>
           <TimelineDot color="primary" variant="outlined">
-            <HotelIcon />
+            <LaptopMacIcon />
+          </TimelineDot>
+          <TimelineConnector />
+        </TimelineSeparator>
+        <TimelineContent style={{ textAlign: 'center' }}>
+          <Paper elevation={3} className={classes.primaryTail}>
+            <Typography variant="h6" component="h1">
+              Bot
+            </Typography>
+            <Typography>
+              Hello, I&apos;m the Virtual Shopping Assistant. Would you like to
+              hear about our new items? If not, select LEAVE, otherwise select
+              STAY.
+            </Typography>
+          </Paper>
+        </TimelineContent>
+      </TimelineItem>
+      <TimelineItem>
+        <TimelineSeparator>
+          <TimelineDot color="primary" variant="outlined">
+            <Face />
           </TimelineDot>
           <TimelineConnector className={classes.secondaryTail} />
         </TimelineSeparator>
         <TimelineContent>
           <Paper elevation={3} className={classes.paper}>
             <Typography variant="h6" component="h1">
-              Sleep
+              User
+            </Typography>
+            <Typography>Selects STAY</Typography>
+          </Paper>
+        </TimelineContent>
+      </TimelineItem>
+      <TimelineItem>
+        <TimelineSeparator>
+          <TimelineDot color="primary" variant="outlined">
+            <LaptopMacIcon />
+          </TimelineDot>
+          <TimelineConnector />
+        </TimelineSeparator>
+        <TimelineContent style={{ textAlign: 'center' }}>
+          <Paper elevation={3} className={classes.primaryTail}>
+            <Typography variant="h6" component="h1">
+              Bot
+            </Typography>
+            <Typography>
+              Fabulous. Let&apos;s start with sweater colors. Are you looking
+              for a LIGHT or DARK color sweater?
+            </Typography>
+          </Paper>
+        </TimelineContent>
+      </TimelineItem>
+      <TimelineItem>
+        <TimelineSeparator>
+          <TimelineDot color="primary" variant="outlined">
+            <Face />
+          </TimelineDot>
+          <TimelineConnector className={classes.secondaryTail} />
+        </TimelineSeparator>
+        <TimelineContent>
+          <Paper elevation={3} className={classes.paper}>
+            <Typography variant="h6" component="h1">
+              User
+            </Typography>
+            <Typography>Selects LIGHT</Typography>
+          </Paper>
+        </TimelineContent>
+      </TimelineItem>
+      <TimelineItem>
+        <TimelineSeparator>
+          <TimelineDot color="primary" variant="outlined">
+            <LaptopMacIcon />
+          </TimelineDot>
+          <TimelineConnector />
+        </TimelineSeparator>
+        <TimelineContent style={{ textAlign: 'center' }}>
+          <Paper elevation={3} className={classes.primaryTail}>
+            <Typography variant="h6" component="h1">
+              Bot
+            </Typography>
+            <Typography>
+              They are available in our stores or online. You can go to our
+              store near your location. Find a store near your location by
+              entering your address
+            </Typography>
+          </Paper>
+        </TimelineContent>
+      </TimelineItem>
+      <TimelineItem>
+        <TimelineSeparator>
+          <TimelineDot color="primary" variant="outlined">
+            <Face />
+          </TimelineDot>
+          <TimelineConnector className={classes.secondaryTail} />
+        </TimelineSeparator>
+        <TimelineContent>
+          <Paper elevation={3} className={classes.paper}>
+            <Typography variant="h6" component="h1">
+              User
+            </Typography>
+            <Typography>
+              Enters address E.g. 2500 Main St, Las Cruces NM 88011
+            </Typography>
+          </Paper>
+        </TimelineContent>
+      </TimelineItem>
+      <TimelineItem>
+        <TimelineSeparator>
+          <TimelineDot color="primary" variant="outlined">
+            <LaptopMacIcon />
+          </TimelineDot>
+          <TimelineConnector />
+        </TimelineSeparator>
+        <TimelineContent style={{ textAlign: 'center' }}>
+          <Paper elevation={3} className={classes.primaryTail}>
+            <Typography variant="h6" component="h1">
+              Bot
+            </Typography>
+            <Typography>What did you say?</Typography>
+          </Paper>
+        </TimelineContent>
+      </TimelineItem>
+      <TimelineItem>
+        <TimelineSeparator>
+          <TimelineDot color="primary" variant="outlined">
+            <Face />
+          </TimelineDot>
+          <TimelineConnector className={classes.secondaryTail} />
+        </TimelineSeparator>
+        <TimelineContent>
+          <Paper elevation={3} className={classes.paper}>
+            <Typography variant="h6" component="h1">
+              User
             </Typography>
             <Typography>Because you need rest</Typography>
           </Paper>
@@ -106,14 +209,78 @@ function TimeLine(classes) {
       </TimelineItem>
       <TimelineItem>
         <TimelineSeparator>
-          <TimelineDot color="secondary">
-            <RepeatIcon />
+          <TimelineDot color="primary" variant="outlined">
+            <LaptopMacIcon />
           </TimelineDot>
+          <TimelineConnector />
+        </TimelineSeparator>
+        <TimelineContent style={{ textAlign: 'center' }}>
+          <Paper elevation={3} className={classes.primaryTail}>
+            <Typography variant="h6" component="h1">
+              Bot
+            </Typography>
+            <Typography>What did you say?</Typography>
+          </Paper>
+        </TimelineContent>
+      </TimelineItem>
+      <TimelineItem>
+        <TimelineSeparator>
+          <TimelineDot color="primary" variant="outlined">
+            <Face />
+          </TimelineDot>
+          <TimelineConnector className={classes.secondaryTail} />
         </TimelineSeparator>
         <TimelineContent>
           <Paper elevation={3} className={classes.paper}>
             <Typography variant="h6" component="h1">
-              Repeat
+              User
+            </Typography>
+            <Typography>Because you need rest</Typography>
+          </Paper>
+        </TimelineContent>
+      </TimelineItem>
+      <TimelineItem>
+        <TimelineSeparator>
+          <TimelineDot color="primary" variant="outlined">
+            <LaptopMacIcon />
+          </TimelineDot>
+          <TimelineConnector />
+        </TimelineSeparator>
+        <TimelineContent style={{ textAlign: 'center' }}>
+          <Paper elevation={3} className={classes.primaryTail}>
+            <Typography variant="h6" component="h1">
+              Bot
+            </Typography>
+            <Typography>What did you say?</Typography>
+          </Paper>
+        </TimelineContent>
+      </TimelineItem>
+      <TimelineItem>
+        <TimelineSeparator>
+          <TimelineDot color="primary" variant="outlined">
+            <Face />
+          </TimelineDot>
+          <TimelineConnector className={classes.secondaryTail} />
+        </TimelineSeparator>
+        <TimelineContent>
+          <Paper elevation={3} className={classes.paper}>
+            <Typography variant="h6" component="h1">
+              User
+            </Typography>
+            <Typography>Because you need rest</Typography>
+          </Paper>
+        </TimelineContent>
+      </TimelineItem>
+      <TimelineItem>
+        <TimelineSeparator>
+          <TimelineDot color="secondary" variant="outlined">
+            <LaptopMacIcon />
+          </TimelineDot>
+        </TimelineSeparator>
+        <TimelineContent style={{ textAlign: 'center' }}>
+          <Paper elevation={3} className={classes.paper}>
+            <Typography variant="h6" component="h1">
+              User
             </Typography>
             <Typography>Because this is the life you love!</Typography>
           </Paper>
@@ -123,68 +290,114 @@ function TimeLine(classes) {
   );
 }
 
-function handlePhoneOnChange(e) {
-  console.log('got here.');
-}
-
 function Layout() {
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [value, setValue] = useState();
+  const [whatsapp, setWhatsapp] = useState();
+
   const classes = useStyles();
+
+  function handleSubmit(e) {
+    console.log('got here.');
+    axios.get('/sendWhatsapp').then((res) => {
+      console.log(res.data);
+      setWhatsapp(res.data);
+    });
+  }
+
   return (
     <div>
-      <Grid container sm={12} justifyContent="center" alignItems="center">
-        <Grid sm={12} style={{ padding: '12px' }}>
-          <Paper className={classes.paper}>
-            Description of what is going to happen here
-          </Paper>
+      <Grid container style={{ height: '50vh' }}>
+        {/* HEADER */}
+        <Grid container sm={12} justifyContent="center">
+          <Grid item sm={12}>
+            <Paper>
+              <Typography variant="body1" component="body1">
+                Early 2021 Facebook added a new feature in WhatsApp for
+                Business: Interactive Messages. <br></br>These new features
+                allow businesses to offer a way to streamline the interactions
+                with the users, <br></br>increasing the response rates and the
+                number of conversions by means of List Messages and Reply Button
+              </Typography>
+            </Paper>
+          </Grid>
         </Grid>
-        {/* LEFT SIDE */}
+        {/* LEFT BODY */}
         <Grid
-          sm={4}
-          item
-          direction="column"
           container
+          sm={4}
+          justifyContent="flex-start"
           alignItems="flex-start"
-          spacing={4}
-          style={{ padding: '12px' }}
         >
-          <Paper className={classes.paper}>
-            <Grid item style={{ padding: '12px', width: '35vh' }}>
-              <Typography variant="h6" component="h1" align="left">
-                From Number
-              </Typography>
-              <PhoneInput
-                defaultCountry="US"
-                placeholder={value}
-                value={value}
-                disabled
-              />
+          {/* UPPER LEFT */}
+          <Grid item container sm={12}>
+            <Grid item>
+              <Paper>
+                <Grid item sm={12} style={{ padding: '12px' }}>
+                  <Typography variant="h5" component="h5" align="left">
+                    Start the WhatsApp Interactive
+                  </Typography>
+                </Grid>
+                <Grid
+                  item
+                  sm={6}
+                  style={{ padding: '12px', textAlign: 'left' }}
+                >
+                  <Typography variant="subtitle1" component="subtitle1">
+                    From Number
+                  </Typography>
+                  <PhoneInput
+                    defaultCountry="US"
+                    placeholder={value}
+                    value="12019758605"
+                    disabled
+                  />
+                </Grid>
+                <Grid
+                  item
+                  sm={6}
+                  style={{ padding: '12px', textAlign: 'left' }}
+                >
+                  <Typography variant="subtitle1" component="subtitle1">
+                    To Number
+                  </Typography>
+                  <PhoneInput
+                    defaultCountry="US"
+                    placeholder="Enter phone number"
+                    value={value}
+                    onChange={(e) => setValue(e.target.value)}
+                  />
+                </Grid>
+                <Grid item style={{ padding: '12px' }} align="left">
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    endIcon={<Icon>send</Icon>}
+                    onClick={handleSubmit}
+                  >
+                    Send
+                  </Button>
+                </Grid>
+              </Paper>
             </Grid>
-            <Grid item style={{ padding: '12px', width: '35vh' }}>
-              <Typography variant="h6" component="h1" align="left">
-                To Number
-              </Typography>
-              <PhoneInput
-                defaultCountry="US"
-                placeholder="Enter phone number"
-                value={value}
-                onChange={setValue}
-              />
+            {/* LOWER LEFT */}
+            <Grid item sm={12}>
+              <Paper>
+                <Grid>
+                  <Typography variant="h5" component="h5" align="left">
+                    Responses will be displayed here
+                  </Typography>
+                </Grid>
+              </Paper>
             </Grid>
-            <Grid item style={{ padding: '12px' }} align="left">
-              <Button
-                variant="contained"
-                color="primary"
-                endIcon={<Icon>send</Icon>}
-              >
-                Send
-              </Button>
-            </Grid>
-          </Paper>
+          </Grid>
         </Grid>
-        {/* RIGHT SIDE */}
-        <Grid item sm={8} container>
-          <TimeLine className={classes} />
+        {/* RIGHT BODY */}
+        <Grid container sm={8} justifyContent="flex-end">
+          <Grid item sm={12}>
+            <TimeLine className={classes} />
+          </Grid>
         </Grid>
       </Grid>
     </div>
