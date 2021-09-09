@@ -11,8 +11,9 @@ app.use(cookieParser());
 // app.use('/images', express.static('images'));
 const sendList = require('./sendList');
 
-app.get('/sendWhatsapp', (req, res) => {
-  sendList();
+app.post('/sendWhatsapp', (req, res) => {
+  console.log('/sendWhatsapp');
+  res.send('RESPONSE');
 });
 
 app.post('/webhooks/inbound', (req, res) => {

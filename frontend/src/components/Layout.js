@@ -18,11 +18,7 @@ import LaptopMacIcon from '@material-ui/icons/LaptopMac';
 import Typography from '@material-ui/core/Typography';
 
 import 'react-phone-number-input/style.css';
-import PhoneInput, {
-  formatPhoneNumber,
-  formatPhoneNumberIntl,
-  isValidPhoneNumber,
-} from 'react-phone-number-input';
+import PhoneInput from 'react-phone-number-input';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -37,10 +33,6 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.secondary.main,
   },
 }));
-
-// From 0 to 600px wide (smart-phones), I take up 12 columns, or the whole device width!
-// From 600-690px wide (tablets), I take up 6 out of 12 columns, so 2 columns fit the screen.
-// From 960px wide and above, I take up 25% of the device (3/12), so 4 columns fit the screen.
 
 function TimeLine(classes) {
   return (
@@ -293,27 +285,38 @@ function TimeLine(classes) {
 function Layout() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [value, setValue] = useState();
+  const [value, setValue] = useState('');
   const [whatsapp, setWhatsapp] = useState();
 
   const classes = useStyles();
 
-  function handleSubmit(e) {
-    console.log('got here.');
-    axios.get('/sendWhatsapp').then((res) => {
-      console.log(res.data);
-      setWhatsapp(res.data);
-    });
+  async function handleClick(event) {
+    event.preventDefault();
+    console.log('got here');
+    await axios
+      .post('/sendWhatsapp')
+      .then((res) => {
+        console.log('res.data:', res.data);
+        setWhatsapp(res.data);
+      })
+      .catch((error) => {
+        setError(error);
+      });
   }
 
   return (
     <div>
       <Grid container style={{ height: '50vh' }}>
         {/* HEADER */}
-        <Grid container sm={12} justifyContent="center">
+        <Grid
+          container
+          justifyContent="center"
+          spacing={4}
+          style={{ marginLeft: '5px', marginRight: '5px' }}
+        >
           <Grid item sm={12}>
             <Paper>
-              <Typography variant="body1" component="body1">
+              <Typography>
                 Early 2021 Facebook added a new feature in WhatsApp for
                 Business: Interactive Messages. <br></br>These new features
                 allow businesses to offer a way to streamline the interactions
@@ -325,14 +328,24 @@ function Layout() {
         </Grid>
         {/* LEFT BODY */}
         <Grid
+          item
           container
-          sm={4}
+          spacing={4}
+          xs={12}
+          sm={12}
+          md={4}
           justifyContent="flex-start"
           alignItems="flex-start"
         >
           {/* UPPER LEFT */}
-          <Grid item container sm={12}>
-            <Grid item>
+          <Grid
+            item
+            container
+            sm={12}
+            spacing={4}
+            style={{ marginLeft: '5px', marginTop: '5px' }}
+          >
+            <Grid item sm={12}>
               <Paper>
                 <Grid item sm={12} style={{ padding: '12px' }}>
                   <Typography variant="h5" component="h5" align="left">
@@ -344,13 +357,12 @@ function Layout() {
                   sm={6}
                   style={{ padding: '12px', textAlign: 'left' }}
                 >
-                  <Typography variant="subtitle1" component="subtitle1">
-                    From Number
-                  </Typography>
+                  <Typography variant="subtitle1">From Number</Typography>
                   <PhoneInput
                     defaultCountry="US"
                     placeholder={value}
                     value="12019758605"
+                    onChange={setValue}
                     disabled
                   />
                 </Grid>
@@ -359,14 +371,12 @@ function Layout() {
                   sm={6}
                   style={{ padding: '12px', textAlign: 'left' }}
                 >
-                  <Typography variant="subtitle1" component="subtitle1">
-                    To Number
-                  </Typography>
+                  <Typography variant="subtitle1">To Number</Typography>
                   <PhoneInput
                     defaultCountry="US"
                     placeholder="Enter phone number"
                     value={value}
-                    onChange={(e) => setValue(e.target.value)}
+                    onChange={setValue}
                   />
                 </Grid>
                 <Grid item style={{ padding: '12px' }} align="left">
@@ -374,7 +384,7 @@ function Layout() {
                     variant="contained"
                     color="primary"
                     endIcon={<Icon>send</Icon>}
-                    onClick={handleSubmit}
+                    onClick={handleClick}
                   >
                     Send
                   </Button>
@@ -387,6 +397,8 @@ function Layout() {
                 <Grid>
                   <Typography variant="h5" component="h5" align="left">
                     Responses will be displayed here
+                    {error}
+                    {whatsapp}
                   </Typography>
                 </Grid>
               </Paper>
@@ -394,7 +406,7 @@ function Layout() {
           </Grid>
         </Grid>
         {/* RIGHT BODY */}
-        <Grid container sm={8} justifyContent="flex-end">
+        <Grid item container xs={12} sm={12} md={8} justifyContent="flex-end">
           <Grid item sm={12}>
             <TimeLine className={classes} />
           </Grid>
