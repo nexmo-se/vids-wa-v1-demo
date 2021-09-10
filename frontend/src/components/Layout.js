@@ -3,7 +3,6 @@ import { makeStyles, withStyles } from '@material-ui/core/styles';
 import { Button, Grid, Paper } from '@material-ui/core';
 import Icon from '@material-ui/core/Icon';
 import axios from 'axios';
-import SendButton from './SendButton';
 
 import Timeline from '@material-ui/lab/Timeline';
 import TimelineItem from '@material-ui/lab/TimelineItem';
