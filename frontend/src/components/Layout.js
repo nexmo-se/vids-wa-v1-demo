@@ -358,7 +358,7 @@ function Layout() {
                 </Grid>
                 <Grid
                   item
-                  sm={6}
+                  sm={12}
                   style={{ padding: '12px', textAlign: 'left' }}
                 >
                   <Typography variant="subtitle1">From Number</Typography>
@@ -372,7 +372,7 @@ function Layout() {
                 </Grid>
                 <Grid
                   item
-                  sm={6}
+                  sm={12}
                   style={{ padding: '12px', textAlign: 'left' }}
                 >
                   <Typography variant="subtitle1">To Number</Typography>
