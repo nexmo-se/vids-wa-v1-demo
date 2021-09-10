@@ -286,18 +286,22 @@ function Layout() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [value, setValue] = useState('');
-  const [whatsapp, setWhatsapp] = useState();
+  const [whatsapp, setWhatsapp] = useState([]);
+  const [response, setResponse] = useState('');
 
   const classes = useStyles();
 
   async function handleClick(event) {
     event.preventDefault();
-    console.log('got here');
+    const object = {
+      phone: value,
+    };
     await axios
-      .post('/sendWhatsapp')
+      .post('/sendWhatsapp', object)
       .then((res) => {
-        console.log('res.data:', res.data);
-        setWhatsapp(res.data);
+        console.log('res.data:', res.data[0].message_uuid);
+        // setWhatsapp(res.data);
+        setResponse(res.data[0].message_uuid);
       })
       .catch((error) => {
         setError(error);
@@ -395,10 +399,19 @@ function Layout() {
             <Grid item sm={12}>
               <Paper>
                 <Grid>
-                  <Typography variant="h5" component="h5" align="left">
-                    Responses will be displayed here
+                  <Typography variant="h6" align="left">
+                    Responses:
+                  </Typography>
+                  <Typography variant="body1">
                     {error}
-                    {whatsapp}
+                    {response}
+                    {/* {whatsapp.map((item, index) => {
+                      return (
+                        <div key={index}>
+                          <div>{item}</div>
+                        </div>
+                      )
+                    })} */}
                   </Typography>
                 </Grid>
               </Paper>

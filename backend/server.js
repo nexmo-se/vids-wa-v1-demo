@@ -11,9 +11,13 @@ app.use(cookieParser());
 // app.use('/images', express.static('images'));
 const sendList = require('./sendList');
 
+// const data = [];
+
 app.post('/sendWhatsapp', (req, res) => {
-  console.log('/sendWhatsapp');
-  res.send('RESPONSE');
+  console.log('req.body', req.body); // { phone: '+15754947093' }
+  sendList(req, res);
+  // data.push(req.body.phone);
+  // res.send(data);
 });
 
 app.post('/webhooks/inbound', (req, res) => {

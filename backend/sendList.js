@@ -6,10 +6,10 @@ var axios = require('axios');
 var privateKey = process.env.PRIVATE_KEY;
 var current = Date.now();
 
-function sendList() {
+function sendList(req, res) {
   var data = JSON.stringify({
     from: '12019758605', // 12019758605
-    to: '15754947093', // 15754947093
+    to: req.body.phone, // 15754947093
     channel: 'whatsapp',
     message_type: 'custom',
     custom: {
@@ -94,6 +94,10 @@ function sendList() {
       axios(config)
         .then(function (response) {
           console.log('\n✅ ', JSON.stringify(response.data));
+          var data = [];
+          data.push(response.data);
+          // console.log(data[0].message_uuid);
+          res.send(data);
         })
         .catch(function (error) {
           console.log(error);
