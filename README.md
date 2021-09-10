@@ -1,6 +1,8 @@
 # vids-wa-v1-demo
 
 ```js
+ngrok http 5000
+
 mv env-example .env
 
 // copy private.key to backend

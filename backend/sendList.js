@@ -15,49 +15,29 @@ function sendList(req, res) {
     custom: {
       type: 'interactive',
       interactive: {
-        type: 'list',
+        type: 'button',
         header: {
           type: 'text',
-          text: 'Select which pill you would like ',
+          text: 'Shopping Interactive',
         },
         body: {
-          text: 'You will be presented with a list of options',
-        },
-        footer: {
-          text: 'There are no wrong choices',
+          text: "Hello, I'm Sierra, the virtual shopping assitant. I can help you when we have new designs available. If you don't want to hear from me again, just select or type LEAVE, otherwise type STAY",
         },
         action: {
-          button: 'Select',
-          sections: [
+          buttons: [
             {
-              title: 'Section A - pills',
-              rows: [
-                {
-                  id: 'row1',
-                  title: 'Red',
-                  description: 'Take the red pill',
-                },
-                {
-                  id: 'row2',
-                  title: 'Blue',
-                  description: 'Take the blue pill',
-                },
-                {
-                  id: 'row3',
-                  title: 'Green',
-                  description: 'Take the green pill',
-                },
-              ],
+              type: 'reply',
+              reply: {
+                id: 'slot-1',
+                title: 'LEAVE',
+              },
             },
             {
-              title: 'Section B - no pills',
-              rows: [
-                {
-                  id: 'row4',
-                  title: 'Nothing',
-                  description: "Don't take a pill",
-                },
-              ],
+              type: 'reply',
+              reply: {
+                id: 'slot-2',
+                title: 'STAY',
+              },
             },
           ],
         },
@@ -75,7 +55,7 @@ function sendList(req, res) {
     { algorithm: 'RS256' },
     function (err, token) {
       if (token) {
-        console.log('\n✅ Received token\n', token);
+        console.log('✅ Received token\n', token);
       } else {
         console.log('\n💀 Unable to fetch token, token:', err);
       }
@@ -93,7 +73,7 @@ function sendList(req, res) {
 
       axios(config)
         .then(function (response) {
-          console.log('\n✅ ', JSON.stringify(response.data));
+          console.log('✅ ', JSON.stringify(response.data));
           var data = [];
           data.push(response.data);
           // console.log(data[0].message_uuid);

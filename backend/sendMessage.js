@@ -1,0 +1,417 @@
+require('dotenv').config();
+var jwt = require('jsonwebtoken');
+var base64 = require('js-base64');
+var axios = require('axios');
+
+var privateKey = process.env.PRIVATE_KEY;
+var current = Date.now();
+
+function sendMessage(req, res, textToSend) {
+  console.log('inside sendMessage');
+  var data = JSON.stringify({
+    from: req.body.to, // REVERSE TO SEND
+    to: req.body.from, // REVERSE TO SEND
+    channel: 'whatsapp',
+    message_type: 'custom',
+    custom: {
+      type: 'interactive',
+      interactive: {
+        type: 'button',
+        header: {
+          type: 'text',
+          text: 'Shopping Interactive',
+        },
+        body: {
+          text: textToSend,
+        },
+        action: {
+          buttons: [
+            {
+              type: 'reply',
+              reply: {
+                id: 'slot-1',
+                title: 'LEAVE',
+              },
+            },
+            {
+              type: 'reply',
+              reply: {
+                id: 'slot-2',
+                title: 'STAY',
+              },
+            },
+          ],
+        },
+      },
+    },
+  });
+
+  jwt.sign(
+    {
+      application_id: process.env.VIDS_APP_ID,
+      iat: current,
+      jti: '' + current,
+    },
+    privateKey,
+    { algorithm: 'RS256' },
+    function (err, token) {
+      if (token) {
+        console.log('✅ Received token\n', token);
+      } else {
+        console.log('\n💀 Unable to fetch token, token:', err);
+      }
+      // REQUEST TO VONAGE
+      var config = {
+        method: 'post',
+        url: 'https://api.nexmo.com/v1/messages', // 'You did not provide correct credentials.', // Fixed by setting PrivateKey to string and adding \n
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        data: data,
+      };
+
+      axios(config)
+        .then(function (response) {
+          console.log('✅ ', JSON.stringify(response.data));
+          var data = [];
+          data.push(response.data);
+          // console.log(data[0].message_uuid);
+          res.send(data);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }
+  );
+}
+
+function lightOrDark(req, res, textToSend) {
+  var data = JSON.stringify({
+    from: req.body.to, // REVERSE TO SEND
+    to: req.body.from, // REVERSE TO SEND
+    channel: 'whatsapp',
+    message_type: 'custom',
+    custom: {
+      type: 'interactive',
+      interactive: {
+        type: 'button',
+        header: {
+          type: 'text',
+          text: 'Shopping Interactive',
+        },
+        body: {
+          text: textToSend,
+        },
+        action: {
+          buttons: [
+            {
+              type: 'reply',
+              reply: {
+                id: 'slot-1',
+                title: 'LIGHT',
+              },
+            },
+            {
+              type: 'reply',
+              reply: {
+                id: 'slot-2',
+                title: 'DARK',
+              },
+            },
+          ],
+        },
+      },
+    },
+  });
+
+  jwt.sign(
+    {
+      application_id: process.env.VIDS_APP_ID,
+      iat: current,
+      jti: '' + current,
+    },
+    privateKey,
+    { algorithm: 'RS256' },
+    function (err, token) {
+      if (token) {
+        console.log('✅ Received token\n', token);
+      } else {
+        console.log('\n💀 Unable to fetch token, token:', err);
+      }
+      // REQUEST TO VONAGE
+      var config = {
+        method: 'post',
+        url: 'https://api.nexmo.com/v1/messages', // 'You did not provide correct credentials.', // Fixed by setting PrivateKey to string and adding \n
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        data: data,
+      };
+
+      axios(config)
+        .then(function (response) {
+          console.log('✅ ', JSON.stringify(response.data));
+          var data = [];
+          data.push(response.data);
+          // console.log(data[0].message_uuid);
+          res.send(data);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }
+  );
+}
+
+function sendListShade(req, res, textToSend) {
+  var data = JSON.stringify({
+    from: req.body.to, // REVERSE TO SEND
+    to: req.body.from, // REVERSE TO SEND
+    channel: 'whatsapp',
+    message_type: 'custom',
+    custom: {
+      type: 'interactive',
+      interactive: {
+        type: 'list',
+        header: {
+          type: 'text',
+          text: 'Select which shirt you would like to see',
+        },
+        body: {
+          text: `We have this new cotton shirt in stock in multiple ${textToSend} colors.`,
+        },
+        footer: {
+          text: 'There are no wrong choices',
+        },
+        action: {
+          button: 'Select',
+          sections: [
+            {
+              title: 'Section A - shirt',
+              rows: [
+                {
+                  id: 'row1',
+                  title: 'Red',
+                  description: 'See the red shirt',
+                },
+                {
+                  id: 'row2',
+                  title: 'Blue',
+                  description: 'See the blue shirt',
+                },
+                {
+                  id: 'row3',
+                  title: 'Green',
+                  description: 'See the green shirt',
+                },
+              ],
+            },
+            {
+              title: 'Section B - no shirt',
+              rows: [
+                {
+                  id: 'row4',
+                  title: 'Nothing',
+                  description: "Don't take a shirt",
+                },
+              ],
+            },
+          ],
+        },
+      },
+    },
+  });
+
+  jwt.sign(
+    {
+      application_id: process.env.VIDS_APP_ID,
+      iat: current,
+      jti: '' + current,
+    },
+    privateKey,
+    { algorithm: 'RS256' },
+    function (err, token) {
+      if (token) {
+        console.log('✅ Received token\n', token);
+      } else {
+        console.log('\n💀 Unable to fetch token, token:', err);
+      }
+      // REQUEST TO VONAGE
+      var config = {
+        method: 'post',
+        url: 'https://api.nexmo.com/v1/messages', // 'You did not provide correct credentials.', // Fixed by setting PrivateKey to string and adding \n
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        data: data,
+      };
+
+      axios(config)
+        .then(function (response) {
+          console.log('✅ ', JSON.stringify(response.data));
+          var data = [];
+          data.push(response.data);
+          // console.log(data[0].message_uuid);
+          res.send(data);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }
+  );
+}
+
+function sendBtnImage(req, res, textToSend, baseURL) {
+  console.log(`${baseURL}/images/${textToSend}600x600.png`);
+  var data = JSON.stringify({
+    from: req.body.to, // REVERSE TO SEND
+    to: req.body.from, // REVERSE TO SEND
+    channel: 'whatsapp',
+    message_type: 'custom',
+    custom: {
+      type: 'interactive',
+      interactive: {
+        type: 'button',
+        header: {
+          type: 'image',
+          image: {
+            // link: 'https://cdn.shopify.com/s/files/1/1368/3463/products/PACIFICBLUECREWCURVE-HEM2.jpg?v=1627512351',
+            link: `${baseURL}/images/${textToSend}600x600.png`,
+          },
+        },
+        body: {
+          text: `Here's our ${textToSend} Short sleeve Shirt. Would you like to order? Press Yes to find a store near you.`,
+        },
+        action: {
+          buttons: [
+            {
+              type: 'reply',
+              reply: {
+                id: 'slot-1',
+                title: 'Yes',
+              },
+            },
+            {
+              type: 'reply',
+              reply: {
+                id: 'slot-2',
+                title: 'No',
+              },
+            },
+            {
+              type: 'reply',
+              reply: {
+                id: 'slot-3',
+                title: 'Visit Website',
+              },
+            },
+          ],
+        },
+      },
+    },
+  });
+
+  jwt.sign(
+    {
+      application_id: process.env.VIDS_APP_ID,
+      iat: current,
+      jti: '' + current,
+    },
+    privateKey,
+    { algorithm: 'RS256' },
+    function (err, token) {
+      if (token) {
+        console.log('✅ Received token\n', token);
+      } else {
+        console.log('\n💀 Unable to fetch token, token:', err);
+      }
+      // REQUEST TO VONAGE
+      var config = {
+        method: 'post',
+        url: 'https://api.nexmo.com/v1/messages', // 'You did not provide correct credentials.', // Fixed by setting PrivateKey to string and adding \n
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        data: data,
+      };
+
+      axios(config)
+        .then(function (response) {
+          console.log('✅ ', JSON.stringify(response.data));
+          var data = [];
+          data.push(response.data);
+          // console.log(data[0].message_uuid);
+          res.send(data);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }
+  );
+}
+
+function sendText(req, res, textToSend) {
+  var data = JSON.stringify({
+    to: req.body.from, // REVERSE TO SEND
+    type: 'text',
+    text: {
+      body: textToSend,
+    },
+  });
+
+  jwt.sign(
+    {
+      application_id: process.env.VIDS_APP_ID,
+      iat: current,
+      jti: '' + current,
+    },
+    privateKey,
+    { algorithm: 'RS256' },
+    function (err, token) {
+      if (token) {
+        console.log('✅ Received token\n', token);
+      } else {
+        console.log('\n💀 Unable to fetch token, token:', err);
+      }
+      // REQUEST TO VONAGE
+      var config = {
+        method: 'post',
+        url: 'https://api.nexmo.com/v1/messages', // 'You did not provide correct credentials.', // Fixed by setting PrivateKey to string and adding \n
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        data: data,
+      };
+
+      axios(config)
+        .then(function (response) {
+          console.log('✅ ', JSON.stringify(response.data));
+          var data = [];
+          data.push(response.data);
+          // console.log(data[0].message_uuid);
+          res.send(data);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }
+  );
+}
+
+module.exports = {
+  sendMessage,
+  lightOrDark,
+  sendListShade,
+  sendBtnImage,
+  sendText,
+};
