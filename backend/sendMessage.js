@@ -363,38 +363,9 @@ function sendText(req, res, textToSend) {
     from: req.body.to, // REVERSE TO SEND
     to: req.body.from, // REVERSE TO SEND
     channel: 'whatsapp',
-    message_type: 'custom',
-    custom: {
-      type: 'interactive',
-      interactive: {
-        type: 'button',
-        header: {
-          type: 'text',
-          text: 'Shopping Interactive',
-        },
-        body: {
-          text: `${textToSend}`,
-        },
-        action: {
-          buttons: [
-            {
-              type: 'reply',
-              reply: {
-                id: 'slot-1',
-                title: 'LEAVE',
-              },
-            },
-            {
-              type: 'reply',
-              reply: {
-                id: 'slot-2',
-                title: 'STAY',
-              },
-            },
-          ],
-        },
-      },
-    },
+    message_type: 'text',
+    text: textToSend,
+    
   });
 
   jwt.sign(

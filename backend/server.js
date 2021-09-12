@@ -48,7 +48,7 @@ app.post('/webhooks/inbound', (req, res) => {
     console.log('💀  Unrecognised Incoming message_type');
   }
 
-  // if message contains address format: 123 Main St Boston, MA 01850
+  // if message contains address format E.g: 123 Main St Boston, MA 01850
   if (/\d+ ([^,]+), ([A-Z]{2}) (\d{5})/.test(message)) {
     console.log('✅ Valid address');
     getCoordinate(req, req, message);
@@ -59,7 +59,7 @@ app.post('/webhooks/inbound', (req, res) => {
         case 'LEAVE':
           textToSend =
             'Sorry to see you leave. You can visit Shopping.com to opt into the virtual assistant again. Good Bye!';
-          sendMessage(req, res, textToSend); // TODO SEND WA MESSAGE
+          sendText(req, res, textToSend);
           break;
         case 'STAY':
           textToSend =
@@ -89,16 +89,16 @@ app.post('/webhooks/inbound', (req, res) => {
         case 'Nothing':
           textToSend =
             'Sorry to see you leave. You can visit Shopping.com to opt into the virtual assistant again. Good Bye!';
-          sendMessage(req, res, textToSend); // TODO SEND WA MESSAGE
+          sendText(req, res, textToSend);
           break;
         case 'Yes':
           textToSend =
             'Great, Please type in your address. E.g. 123 Main St Boston, MA 01850';
-          sendMessage(req, res, textToSend); // TODO SEND WA MESSAGE
+          sendText(req, res, textToSend);
           break;
         default:
           textToSend = 'Sorry, you entered an invalid input. Try again.';
-          sendMessage(req, res, textToSend); // TODO SEND WA MESSAGE
+          sendText(req, res, textToSend);
           break;
       }
     }
