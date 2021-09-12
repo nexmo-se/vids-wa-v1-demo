@@ -360,10 +360,145 @@ function sendBtnImage(req, res, textToSend, baseURL) {
 
 function sendText(req, res, textToSend) {
   var data = JSON.stringify({
+    from: req.body.to, // REVERSE TO SEND
     to: req.body.from, // REVERSE TO SEND
-    type: 'text',
-    text: {
-      body: textToSend,
+    channel: 'whatsapp',
+    message_type: 'custom',
+    custom: {
+      type: 'interactive',
+      interactive: {
+        type: 'button',
+        header: {
+          type: 'text',
+          text: 'Shopping Interactive',
+        },
+        body: {
+          text: `${textToSend}`,
+        },
+        action: {
+          buttons: [
+            {
+              type: 'reply',
+              reply: {
+                id: 'slot-1',
+                title: 'LEAVE',
+              },
+            },
+            {
+              type: 'reply',
+              reply: {
+                id: 'slot-2',
+                title: 'STAY',
+              },
+            },
+          ],
+        },
+      },
+    },
+  });
+
+  jwt.sign(
+    {
+      application_id: process.env.VIDS_APP_ID,
+      iat: current,
+      jti: '' + current,
+    },
+    privateKey,
+    { algorithm: 'RS256' },
+    function (err, token) {
+      if (token) {
+        console.log('✅ Received token\n', token);
+      } else {
+        console.log('\n💀 Unable to fetch token, token:', err);
+      }
+      // REQUEST TO VONAGE
+      var config = {
+        method: 'post',
+        url: 'https://api.nexmo.com/v1/messages', // 'You did not provide correct credentials.', // Fixed by setting PrivateKey to string and adding \n
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        data: data,
+      };
+
+      axios(config)
+        .then(function (response) {
+          console.log('✅ ', JSON.stringify(response.data));
+          var data = [];
+          data.push(response.data);
+          // console.log(data[0].message_uuid);
+          res.send(data);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }
+  );
+}
+
+function sendLocation(req, res, coordinates) {
+  var data = JSON.stringify({
+    from: req.body.to, // REVERSE TO SEND
+    to: req.body.from, // REVERSE TO SEND
+    channel: 'whatsapp',
+    message_type: 'custom',
+    custom: {
+      type: 'interactive',
+      interactive: {
+        type: 'list',
+        header: {
+          type: 'text',
+          text: 'List of stores closest to your address',
+        },
+        body: {
+          text: 'Please select one in the list',
+        },
+        footer: {
+          text: 'There are no wrong choices',
+        },
+        action: {
+          button: 'Select',
+          sections: [
+            {
+              title: 'Store neares you',
+              rows: [
+                {
+                  id: 'address1',
+                  title: `${coordinates[0].location} ${coordinates[0].milesToAddress} miles away`,
+                  description: `${coordinates[0].address}`,
+                },
+                {
+                  id: 'address2',
+                  title: `${coordinates[1].location} ${coordinates[1].milesToAddress} miles away`,
+                  description: `${coordinates[1].address}`,
+                },
+                {
+                  id: 'address3',
+                  title: `${coordinates[2].location} ${coordinates[2].milesToAddress} miles away`,
+                  description: `${coordinates[2].address}`,
+                },
+                {
+                  id: 'address4',
+                  title: `${coordinates[3].location} ${coordinates[3].milesToAddress} miles away`,
+                  description: `${coordinates[3].address}`,
+                },
+              ],
+            },
+            // {
+            //   title: 'Select to Exit',
+            //   rows: [
+            //     {
+            //       id: 'address5',
+            //       title: 'Exit',
+            //       description: 'Close this list',
+            //     },
+            //   ],
+            // },
+          ],
+        },
+      },
     },
   });
 
@@ -414,4 +549,5 @@ module.exports = {
   sendListShade,
   sendBtnImage,
   sendText,
+  sendLocation,
 };

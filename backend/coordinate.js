@@ -1,7 +1,7 @@
 require('dotenv').config();
-const fetch = require('node-fetch');
+const axios = require('axios');
 const { getDistance } = require('./distance');
-const sendList = require('./sendList');
+const { sendLocation } = require('./sendMessage');
 const GEOCODE_API_KEY = process.env.GEOCODE_API_KEY;
 
 var myCoordinate = {
@@ -33,33 +33,31 @@ var coordinates = [
 ];
 
 // STEP_1: Fetch (latitude and longitude) of an address
-function getCoordinate(fromNumber, toNumber, address) {
+function getCoordinate(req, res, address) {
   var urlifiedAddress = address.replace(/ /g, '%20');
-  fetch(
+  axios(
     `https://api.geo.codes/v1/address/geocode?q=${urlifiedAddress}&api_key=${GEOCODE_API_KEY}`
-  )
-    .then((res) => res.json())
-    .then((json) => {
-      var list = [];
-      // STEP_2: Compare coordinate to list of coordinates
-      coordinates.forEach((obj) => {
-        var miles = getDistance(
-          json.coordinate.latitude,
-          json.coordinate.longitude,
-          obj.coordinate.latitude,
-          obj.coordinate.longitude
-        );
-        // Step_3: Add miles to address to new object.
-        obj.milesToAddress = miles;
-      });
-      // Step_4: Sort objects in ascending order
-      coordinates.sort((a, b) => {
-        return a.milesToAddress - b.milesToAddress;
-      });
-      console.log('here.');
-      // console.log(coordinates);
-      sendList.locations(fromNumber, toNumber, coordinates);
+  ).then((res) => {
+    // console.log('RES.DATA', res.data);
+    // STEP_2: Compare coordinate to list of coordinates
+    coordinates.forEach((obj) => {
+      var miles = getDistance(
+        res.data.coordinate.latitude,
+        res.data.coordinate.longitude,
+        obj.coordinate.latitude,
+        obj.coordinate.longitude
+      );
+      // Step_3: Add miles to address to new object.
+      obj.milesToAddress = miles;
     });
+    // Step_4: Sort objects in ascending order
+    coordinates.sort((a, b) => {
+      return a.milesToAddress - b.milesToAddress;
+    });
+    // console.log(coordinates);
+
+    sendLocation(req, req, coordinates);
+  });
 }
 
 module.exports = { getCoordinate };

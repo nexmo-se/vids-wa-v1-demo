@@ -10,13 +10,17 @@ app.use(cookieParser());
 app.use(express.static('public'));
 app.use('/images', express.static('images'));
 const { registerWA, removeRegWA } = require('./register');
-const sendList = require('./sendList');
+const sendList = require('./sendList'); // initial greeting that Send button sends
 const {
   sendMessage,
   lightOrDark,
   sendListShade,
   sendBtnImage,
+  sendText,
+  sendLocation,
 } = require('./sendMessage');
+
+const { getCoordinate } = require('./coordinate');
 
 var phoneNumber = '';
 const baseURL = 'https://kittphi.ngrok.io';
@@ -34,11 +38,20 @@ app.post('/sendWhatsapp', (req, res) => {
 
 app.post('/webhooks/inbound', (req, res) => {
   console.log('🗞️  inbound', req.body);
-  let message = req.body.reply.title;
+
+  var message;
+  if (req.body.message_type === 'text') {
+    message = req.body.text;
+  } else if (req.body.message_type === 'reply') {
+    message = req.body.reply.title;
+  } else {
+    console.log('💀  Unrecognised Incoming message_type');
+  }
 
   // if message contains address format: 123 Main St Boston, MA 01850
   if (/\d+ ([^,]+), ([A-Z]{2}) (\d{5})/.test(message)) {
-    // getCoordinate(req.body.from, req.body.to, message);
+    console.log('✅ Valid address');
+    getCoordinate(req, req, message);
   } else {
     var textToSend;
     if (message) {
@@ -92,7 +105,7 @@ app.post('/webhooks/inbound', (req, res) => {
   }
   // when demo has completed removeRegWA
   // removeRegWA(phoneNumber, url, 'incoming');
-  // res.status(200).end();
+  // res.status(200).end(); // Cannot set headers after they are sent to the client (Because in sendMessage has res.send(data))
 });
 
 app.post('/webhooks/status', (req, res) => {
