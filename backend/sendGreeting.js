@@ -6,7 +6,8 @@ var axios = require('axios');
 var privateKey = process.env.PRIVATE_KEY;
 var current = Date.now();
 
-function sendList(req, res) {
+function sendGreeting(req, res) {
+  console.log('sendGreeting()');
   var data = JSON.stringify({
     from: '12019758605', // 12019758605
     to: req.body.phone, // 15754947093
@@ -86,4 +87,4 @@ function sendList(req, res) {
   );
 }
 
-module.exports = sendList;
+module.exports = sendGreeting;

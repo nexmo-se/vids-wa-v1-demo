@@ -1,7 +1,7 @@
 require('dotenv').config();
 const axios = require('axios');
 const { getDistance } = require('./distance');
-const { sendLocation } = require('./sendMessage');
+const { sendLocationList, sendLocation } = require('./sendMessage');
 const GEOCODE_API_KEY = process.env.GEOCODE_API_KEY;
 
 var myCoordinate = {
@@ -55,8 +55,21 @@ function getCoordinate(req, res, address) {
       return a.milesToAddress - b.milesToAddress;
     });
     // console.log(coordinates);
-    sendLocation(req, res, coordinates);
+    sendLocationList(req, res, coordinates);
   });
 }
 
-module.exports = { getCoordinate };
+function getOneCoordinate(req, res, address) {
+  var urlifiedAddress = address.replace(/ /g, '%20');
+  axios(
+    `https://api.geo.codes/v1/address/geocode?q=${urlifiedAddress}&api_key=${GEOCODE_API_KEY}`
+  ).then((res) => {
+    // console.log('RES.DATA', res.data);
+
+    let lat = res.data.coordinate.latitude;
+    let lon = res.data.coordinate.longitude;
+    sendLocation(req, res, address, lat, lon);
+  });
+}
+
+module.exports = { getCoordinate, getOneCoordinate };

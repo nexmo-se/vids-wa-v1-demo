@@ -408,7 +408,7 @@ function sendText(req, res, textToSend) {
   );
 }
 
-function sendLocation(req, res, coordinates) {
+function sendLocationList(req, res, coordinates) {
   var data = JSON.stringify({
     from: req.body.to, // REVERSE TO SEND
     to: req.body.from, // REVERSE TO SEND
@@ -513,11 +513,70 @@ function sendLocation(req, res, coordinates) {
   );
 }
 
+function sendLocation(req, res, address, lat, lon) {
+  var data = JSON.stringify({
+    from: req.body.to, // REVERSE TO SEND
+    to: req.body.from, // REVERSE TO SEND
+    channel: 'whatsapp',
+    message_type: 'custom',
+    custom: {
+      type: 'location',
+      location: {
+        longitude: lon,
+        latitude: lat,
+        name: address,
+        address: address,
+      },
+    },
+  });
+
+  jwt.sign(
+    {
+      application_id: process.env.VIDS_APP_ID,
+      iat: current,
+      jti: '' + current,
+    },
+    privateKey,
+    { algorithm: 'RS256' },
+    function (err, token) {
+      if (token) {
+        console.log('✅ Received token\n', token);
+      } else {
+        console.log('\n💀 Unable to fetch token, token:', err);
+      }
+      // REQUEST TO VONAGE
+      var config = {
+        method: 'post',
+        url: 'https://api.nexmo.com/v1/messages', // 'You did not provide correct credentials.', // Fixed by setting PrivateKey to string and adding \n
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        data: data,
+      };
+
+      axios(config)
+        .then(function (response) {
+          console.log('✅ ', JSON.stringify(response.data));
+          var data = [];
+          data.push(response.data);
+          // console.log(data[0].message_uuid);
+          // res.send(data);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }
+  );
+}
+
 module.exports = {
   sendMessage,
   lightOrDark,
   sendListShade,
   sendBtnImage,
   sendText,
+  sendLocationList,
   sendLocation,
 };

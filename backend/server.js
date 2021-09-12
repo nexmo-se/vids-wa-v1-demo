@@ -10,7 +10,7 @@ app.use(cookieParser());
 app.use(express.static('public'));
 app.use('/images', express.static('images'));
 const { registerWA, removeRegWA } = require('./register');
-const sendList = require('./sendList'); // initial greeting that Send button sends
+const sendGreeting = require('./sendGreeting'); // initial greeting that Send button sends
 const {
   sendMessage,
   lightOrDark,
@@ -20,7 +20,7 @@ const {
   sendLocation,
 } = require('./sendMessage');
 
-const { getCoordinate } = require('./coordinate');
+const { getCoordinate, getOneCoordinate } = require('./coordinate');
 
 var phoneNumber = '';
 const baseURL = 'https://kittphi.ngrok.io';
@@ -33,33 +33,48 @@ app.post('/sendWhatsapp', (req, res) => {
   phoneNumber = phone.replace('+', '');
 
   // registerWA(phoneNumber, url, 'incoming', waNumber);
-  sendList(req, res);
+  sendGreeting(req, res);
 });
 
 app.post('/webhooks/inbound', (req, res) => {
   console.log('🗞️  inbound', req.body);
 
-  var message;
+  var text;
+  var reply;
+  let replyAddress;
+  // IF ADDRESS IS INPUTED
   if (req.body.message_type === 'text') {
-    message = req.body.text;
+    text = req.body.text;
+    // ELSE IF BUTTON OR LIST IS SELECTED
   } else if (req.body.message_type === 'reply') {
-    message = req.body.reply.title;
+    reply = req.body.reply.title;
+    if (req.body.reply.description) {
+      replyAddress = req.body.reply.description;
+    }
+    // ELSE IF LIST IS SELECTED && DESCRIPTION CONTAINES ADDRESS
   } else {
     console.log('💀  Unrecognised Incoming message_type');
   }
 
-  // if message contains address format E.g: 123 Main St Boston, MA 01850
-  if (/\d+ ([^,]+), ([A-Z]{2}) (\d{5})/.test(message)) {
-    console.log('✅ Valid address');
-    getCoordinate(req, res, message);
+  // IF ADDRESS IS INPUTED && contains address format E.g: 123 Main St Boston, MA 01850
+  if (/\d+ ([^,]+), ([A-Z]{2}) (\d{5})/.test(text)) {
+    console.log('✅ Valid address to compare');
+    getCoordinate(req, res, text);
     res.status(200).end();
+    // ELSE IF IS A REPLY AND ADDRESS SELECTED HAS ZIPCODE
+  } else if (reply && /(\d{5})/.test(replyAddress)) {
+    console.log('✅ Valid address');
+    getOneCoordinate(req, res, replyAddress);
+    res.status(200).end();
+    // HANDLES ALL REPLIES (SELECTIONS OF BUTTONS AND LIST)
   } else {
     var textToSend;
-    if (message) {
-      switch (message) {
+    // IF A SELECTION IS MADE AND NOT VALID ADDRESS FORMAT
+    if (reply || !/\d+ ([^,]+), ([A-Z]{2}) (\d{5})/.test(text)) {
+      switch (reply) {
         case 'LEAVE':
           textToSend =
-            'Sorry to see you leave. You can visit Shopping.com to opt into the virtual assistant again. Good Bye!';
+            'Sorry to see you leave. You can visit Vonage-Shopping.com to opt into the virtual assistant again. Good Bye!';
           sendText(req, res, textToSend);
           break;
         case 'STAY':
@@ -89,7 +104,7 @@ app.post('/webhooks/inbound', (req, res) => {
           break;
         case 'Nothing':
           textToSend =
-            'Sorry to see you leave. You can visit Shopping.com to opt into the virtual assistant again. Good Bye!';
+            'Sorry to see you leave. You can visit Vonage-Shopping.com to opt into the virtual assistant again. Good Bye!';
           sendText(req, res, textToSend);
           break;
         case 'Yes':
@@ -97,8 +112,18 @@ app.post('/webhooks/inbound', (req, res) => {
             'Great, Please type in your address. E.g. 123 Main St Boston, MA 01850';
           sendText(req, res, textToSend);
           break;
+        case 'No':
+          textToSend =
+            'Sorry to see you leave. You can visit Vonage-Shopping.com to opt into the virtual assistant again. Good Bye!';
+          sendText(req, res, textToSend);
+          break;
+        case 'Visit Website':
+          textToSend = 'Please visit Vonage-Shopping.com';
+          sendText(req, res, textToSend);
+          break;
         default:
-          textToSend = 'Sorry, you entered an invalid input. Try again.';
+          textToSend =
+            'Sorry, your input was invalid. For address format E.g. 123 Main St Boston, MA 01850';
           sendText(req, res, textToSend);
           break;
       }
