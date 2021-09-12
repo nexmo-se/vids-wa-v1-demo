@@ -55,8 +55,7 @@ function getCoordinate(req, res, address) {
       return a.milesToAddress - b.milesToAddress;
     });
     // console.log(coordinates);
-
-    sendLocation(req, req, coordinates);
+    sendLocation(req, res, coordinates);
   });
 }
 

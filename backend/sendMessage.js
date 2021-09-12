@@ -365,7 +365,6 @@ function sendText(req, res, textToSend) {
     channel: 'whatsapp',
     message_type: 'text',
     text: textToSend,
-    
   });
 
   jwt.sign(
@@ -505,7 +504,7 @@ function sendLocation(req, res, coordinates) {
           var data = [];
           data.push(response.data);
           // console.log(data[0].message_uuid);
-          res.send(data);
+          // res.send(data);
         })
         .catch(function (error) {
           console.log(error);

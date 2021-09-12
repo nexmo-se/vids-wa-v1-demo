@@ -32,7 +32,7 @@ app.post('/sendWhatsapp', (req, res) => {
   let phone = req.body.phone;
   phoneNumber = phone.replace('+', '');
 
-  registerWA(phoneNumber, url, 'incoming', waNumber);
+  // registerWA(phoneNumber, url, 'incoming', waNumber);
   sendList(req, res);
 });
 
@@ -51,7 +51,8 @@ app.post('/webhooks/inbound', (req, res) => {
   // if message contains address format E.g: 123 Main St Boston, MA 01850
   if (/\d+ ([^,]+), ([A-Z]{2}) (\d{5})/.test(message)) {
     console.log('✅ Valid address');
-    getCoordinate(req, req, message);
+    getCoordinate(req, res, message);
+    res.status(200).end();
   } else {
     var textToSend;
     if (message) {
