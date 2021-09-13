@@ -1,6 +1,9 @@
 # vids-wa-v1-demo
 
 ```js
+// clone repo
+
+// use a local tunnel app E.g. Ngrok
 ngrok http 5000
 
 mv env-example .env
