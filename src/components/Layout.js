@@ -53,7 +53,10 @@ function TimeLine(classes) {
             <Typography variant="h6" component="h1">
               User
             </Typography>
-            <Typography>Types Hello</Typography>
+            <Typography>
+              Type Hello to the WhatsApp Number 12019758605, then enter your
+              Number and press Send to begin.
+            </Typography>
           </Paper>
         </TimelineContent>
       </TimelineItem>
@@ -106,8 +109,8 @@ function TimeLine(classes) {
               Bot
             </Typography>
             <Typography>
-              Fabulous. Let&apos;s start with sweater colors. Are you looking
-              for a LIGHT or DARK color sweater?
+              Fabulous. Let&apos;s start with shirt colors. Are you looking for
+              a LIGHT or DARK color shirt?
             </Typography>
           </Paper>
         </TimelineContent>
@@ -124,7 +127,7 @@ function TimeLine(classes) {
             <Typography variant="h6" component="h1">
               User
             </Typography>
-            <Typography>Selects LIGHT</Typography>
+            <Typography>Selects LIGHT or DARK</Typography>
           </Paper>
         </TimelineContent>
       </TimelineItem>
@@ -141,9 +144,78 @@ function TimeLine(classes) {
               Bot
             </Typography>
             <Typography>
-              They are available in our stores or online. You can go to our
-              store near your location. Find a store near your location by
-              entering your address
+              Select which shirt you would like to see. We have this new cotton
+              shirt in stock in multiple light|dark color shirt.
+            </Typography>
+          </Paper>
+        </TimelineContent>
+      </TimelineItem>
+      <TimelineItem>
+        <TimelineSeparator>
+          <TimelineDot color="primary" variant="outlined">
+            <Face />
+          </TimelineDot>
+          <TimelineConnector className={classes.secondaryTail} />
+        </TimelineSeparator>
+        <TimelineContent>
+          <Paper elevation={3} className={classes.paper}>
+            <Typography variant="h6" component="h1">
+              User
+            </Typography>
+            <Typography>Selects color, then press Send.</Typography>
+          </Paper>
+        </TimelineContent>
+      </TimelineItem>
+      <TimelineItem>
+        <TimelineSeparator>
+          <TimelineDot color="primary" variant="outlined">
+            <LaptopMacIcon />
+          </TimelineDot>
+          <TimelineConnector />
+        </TimelineSeparator>
+        <TimelineContent style={{ textAlign: 'center' }}>
+          <Paper elevation={3} className={classes.primaryTail}>
+            <Typography variant="h6" component="h1">
+              Bot
+            </Typography>
+            <Typography>
+              Here's our color short sleeve shirt. Would you like to order?
+              Press Yes to find a store near you.
+            </Typography>
+          </Paper>
+        </TimelineContent>
+      </TimelineItem>
+      <TimelineItem>
+        <TimelineSeparator>
+          <TimelineDot color="primary" variant="outlined">
+            <Face />
+          </TimelineDot>
+          <TimelineConnector className={classes.secondaryTail} />
+        </TimelineSeparator>
+        <TimelineContent>
+          <Paper elevation={3} className={classes.paper}>
+            <Typography variant="h6" component="h1">
+              User
+            </Typography>
+            <Typography>Selects Yes</Typography>
+          </Paper>
+        </TimelineContent>
+      </TimelineItem>
+      <TimelineItem>
+        <TimelineSeparator>
+          <TimelineDot color="primary" variant="outlined">
+            <LaptopMacIcon />
+          </TimelineDot>
+          <TimelineConnector />
+        </TimelineSeparator>
+        <TimelineContent style={{ textAlign: 'center' }}>
+          <Paper elevation={3} className={classes.primaryTail}>
+            <Typography variant="h6" component="h1">
+              Bot
+            </Typography>
+            <Typography>
+              Great, Please type in your address. E.g. 2500 Main Street Las
+              Cruces, NM 88012
             </Typography>
           </Paper>
         </TimelineContent>
@@ -161,7 +233,7 @@ function TimeLine(classes) {
               User
             </Typography>
             <Typography>
-              Enters address E.g. 2500 Main St, Las Cruces NM 88011
+              Enters address E.g. 2500 Main Street Las Cruces, NM 88011
             </Typography>
           </Paper>
         </TimelineContent>
@@ -178,7 +250,10 @@ function TimeLine(classes) {
             <Typography variant="h6" component="h1">
               Bot
             </Typography>
-            <Typography>What did you say?</Typography>
+            <Typography>
+              List of stores closest to your address. Please select one in the
+              list. There are no wrong choices.
+            </Typography>
           </Paper>
         </TimelineContent>
       </TimelineItem>
@@ -194,71 +269,7 @@ function TimeLine(classes) {
             <Typography variant="h6" component="h1">
               User
             </Typography>
-            <Typography>Because you need rest</Typography>
-          </Paper>
-        </TimelineContent>
-      </TimelineItem>
-      <TimelineItem>
-        <TimelineSeparator>
-          <TimelineDot color="primary" variant="outlined">
-            <LaptopMacIcon />
-          </TimelineDot>
-          <TimelineConnector />
-        </TimelineSeparator>
-        <TimelineContent style={{ textAlign: 'center' }}>
-          <Paper elevation={3} className={classes.primaryTail}>
-            <Typography variant="h6" component="h1">
-              Bot
-            </Typography>
-            <Typography>What did you say?</Typography>
-          </Paper>
-        </TimelineContent>
-      </TimelineItem>
-      <TimelineItem>
-        <TimelineSeparator>
-          <TimelineDot color="primary" variant="outlined">
-            <Face />
-          </TimelineDot>
-          <TimelineConnector className={classes.secondaryTail} />
-        </TimelineSeparator>
-        <TimelineContent>
-          <Paper elevation={3} className={classes.paper}>
-            <Typography variant="h6" component="h1">
-              User
-            </Typography>
-            <Typography>Because you need rest</Typography>
-          </Paper>
-        </TimelineContent>
-      </TimelineItem>
-      <TimelineItem>
-        <TimelineSeparator>
-          <TimelineDot color="primary" variant="outlined">
-            <LaptopMacIcon />
-          </TimelineDot>
-          <TimelineConnector />
-        </TimelineSeparator>
-        <TimelineContent style={{ textAlign: 'center' }}>
-          <Paper elevation={3} className={classes.primaryTail}>
-            <Typography variant="h6" component="h1">
-              Bot
-            </Typography>
-            <Typography>What did you say?</Typography>
-          </Paper>
-        </TimelineContent>
-      </TimelineItem>
-      <TimelineItem>
-        <TimelineSeparator>
-          <TimelineDot color="primary" variant="outlined">
-            <Face />
-          </TimelineDot>
-          <TimelineConnector className={classes.secondaryTail} />
-        </TimelineSeparator>
-        <TimelineContent>
-          <Paper elevation={3} className={classes.paper}>
-            <Typography variant="h6" component="h1">
-              User
-            </Typography>
-            <Typography>Because you need rest</Typography>
+            <Typography>Selects one address, then press Send.</Typography>
           </Paper>
         </TimelineContent>
       </TimelineItem>
@@ -273,7 +284,9 @@ function TimeLine(classes) {
             <Typography variant="h6" component="h1">
               User
             </Typography>
-            <Typography>Because this is the life you love!</Typography>
+            <Typography>
+              Send location to nearest store. Demo has completed.
+            </Typography>
           </Paper>
         </TimelineContent>
       </TimelineItem>
@@ -282,7 +295,6 @@ function TimeLine(classes) {
 }
 
 function Layout() {
-  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [value, setValue] = useState('');
   const [whatsapp, setWhatsapp] = useState([]);

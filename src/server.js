@@ -43,6 +43,7 @@ app.post('/webhooks/inbound', (req, res) => {
   // IF ADDRESS IS INPUTED
   if (req.body.message_type === 'text') {
     text = req.body.text;
+    reply = req.body.text;
     // ELSE IF BUTTON OR LIST IS SELECTED
   } else if (req.body.message_type === 'reply') {
     reply = req.body.reply.title;
@@ -70,6 +71,11 @@ app.post('/webhooks/inbound', (req, res) => {
     // IF A SELECTION IS MADE AND NOT VALID ADDRESS FORMAT
     if (reply || !/\d+ ([^,]+), ([A-Z]{2}) (\d{5})/.test(text)) {
       switch (reply) {
+        case 'Hello':
+          textToSend =
+            'At VIDS Demo, Please enter your number and press Send to begin interactive';
+          sendText(req, res, textToSend);
+          break;
         case 'LEAVE':
           textToSend =
             'Sorry to see you leave. You can visit Vonage-Shopping.com to opt into the virtual assistant again. Good Bye!';
