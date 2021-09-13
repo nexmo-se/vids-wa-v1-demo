@@ -30,7 +30,7 @@ app.post('/sendWhatsapp', (req, res) => {
   let phone = req.body.phone;
   phoneNumber = phone.replace('+', '');
 
-  // registerWA(phoneNumber, url, 'incoming', waNumber);
+  registerWA(phoneNumber, url, 'incoming', waNumber);
   sendGreeting(req, res);
 });
 
