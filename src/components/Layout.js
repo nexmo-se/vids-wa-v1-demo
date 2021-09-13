@@ -62,7 +62,7 @@ function TimeLine(classes) {
       </TimelineItem>
       <TimelineItem>
         <TimelineSeparator>
-          <TimelineDot color="primary" variant="outlined">
+          <TimelineDot color="primary" variant="default">
             <LaptopMacIcon />
           </TimelineDot>
           <TimelineConnector />
@@ -98,7 +98,7 @@ function TimeLine(classes) {
       </TimelineItem>
       <TimelineItem>
         <TimelineSeparator>
-          <TimelineDot color="primary" variant="outlined">
+          <TimelineDot color="primary" variant="default">
             <LaptopMacIcon />
           </TimelineDot>
           <TimelineConnector />
@@ -133,7 +133,7 @@ function TimeLine(classes) {
       </TimelineItem>
       <TimelineItem>
         <TimelineSeparator>
-          <TimelineDot color="primary" variant="outlined">
+          <TimelineDot color="primary" variant="default">
             <LaptopMacIcon />
           </TimelineDot>
           <TimelineConnector />
@@ -168,7 +168,7 @@ function TimeLine(classes) {
       </TimelineItem>
       <TimelineItem>
         <TimelineSeparator>
-          <TimelineDot color="primary" variant="outlined">
+          <TimelineDot color="primary" variant="default">
             <LaptopMacIcon />
           </TimelineDot>
           <TimelineConnector />
@@ -203,7 +203,7 @@ function TimeLine(classes) {
       </TimelineItem>
       <TimelineItem>
         <TimelineSeparator>
-          <TimelineDot color="primary" variant="outlined">
+          <TimelineDot color="primary" variant="default">
             <LaptopMacIcon />
           </TimelineDot>
           <TimelineConnector />
@@ -240,7 +240,7 @@ function TimeLine(classes) {
       </TimelineItem>
       <TimelineItem>
         <TimelineSeparator>
-          <TimelineDot color="primary" variant="outlined">
+          <TimelineDot color="primary" variant="default">
             <LaptopMacIcon />
           </TimelineDot>
           <TimelineConnector />
@@ -275,14 +275,14 @@ function TimeLine(classes) {
       </TimelineItem>
       <TimelineItem>
         <TimelineSeparator>
-          <TimelineDot color="secondary" variant="outlined">
+          <TimelineDot color="secondary" variant="default">
             <LaptopMacIcon />
           </TimelineDot>
         </TimelineSeparator>
         <TimelineContent style={{ textAlign: 'center' }}>
           <Paper elevation={3} className={classes.paper}>
             <Typography variant="h6" component="h1">
-              User
+              Bot
             </Typography>
             <Typography>
               Send location to nearest store. Demo has completed.
