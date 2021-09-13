@@ -10,14 +10,12 @@ app.use(cookieParser());
 app.use(express.static('public'));
 app.use('/images', express.static('images'));
 const { registerWA, removeRegWA } = require('./register');
-const sendGreeting = require('./sendGreeting'); // initial greeting that Send button sends
 const {
-  sendMessage,
+  sendGreeting,
   lightOrDark,
   sendListShade,
   sendBtnImage,
   sendText,
-  sendLocation,
 } = require('./sendMessage');
 
 const { getCoordinate, getOneCoordinate } = require('./coordinate');

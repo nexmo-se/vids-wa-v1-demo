@@ -6,11 +6,10 @@ var axios = require('axios');
 var privateKey = process.env.PRIVATE_KEY;
 var current = Date.now();
 
-function sendMessage(req, res, textToSend) {
-  console.log('inside sendMessage');
+function sendGreeting(req, res) {
   var data = JSON.stringify({
-    from: req.body.to, // REVERSE TO SEND
-    to: req.body.from, // REVERSE TO SEND
+    from: '12019758605', // 12019758605
+    to: req.body.phone, // 15754947093
     channel: 'whatsapp',
     message_type: 'custom',
     custom: {
@@ -22,7 +21,7 @@ function sendMessage(req, res, textToSend) {
           text: 'Shopping Interactive',
         },
         body: {
-          text: textToSend,
+          text: "Hello, I'm Sierra, the virtual shopping assitant. I can help you when we have new designs available. If you don't want to hear from me again, just select or type LEAVE, otherwise type STAY",
         },
         action: {
           buttons: [
@@ -572,7 +571,7 @@ function sendLocation(req, res, address, lat, lon) {
 }
 
 module.exports = {
-  sendMessage,
+  sendGreeting,
   lightOrDark,
   sendListShade,
   sendBtnImage,
