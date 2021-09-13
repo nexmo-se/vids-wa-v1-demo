@@ -4,22 +4,17 @@
 ngrok http 5000
 
 mv env-example .env
+// populate environment variables
+// copy private.key to root of repository
 
-// copy private.key to backend
-
-cd fronend
 npm install
-
-cd backend
-npm install express cookie-parser morgan dotenv jsonwebtoken js-base64 axios request
 npm install nodemon concurrently --save-dev
 
 // to run both backend and frontend concurrently:
-cd backend
 npm run dev
 ```
 
 ### Libraries:
 
-[material-ui]()
+[Messages V1 API Reference](https://vonage-messages-v1.herokuapp.com/definitions/messages)
 [react-phone-number-input](https://www.npmjs.com/package/react-phone-number-input)
