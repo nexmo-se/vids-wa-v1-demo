@@ -1,6 +1,9 @@
+require('dotenv').config();
 let express = require('express');
 let cookieParser = require('cookie-parser');
 let logger = require('morgan');
+const Pusher = require('pusher');
+
 let app = express();
 let port = 5000;
 app.use(logger('dev'));
@@ -22,19 +25,37 @@ const { getCoordinate, getOneCoordinate } = require('./coordinate');
 
 var phoneNumber = '';
 const baseURL = 'https://kittphi.ngrok.io';
-const url = 'https://kittphi.ngrok.io/webhooks/inbound';
+const url = 'https://kittphi.ngrok.io/inbound';
 const waNumber = '12019758605';
 
-app.post('/sendWhatsapp', (req, res) => {
-  // console.log('req.body', req.body); // { phone: '+15754947093' }
+const pusher = new Pusher({
+  appId: process.env.PUSHER_APP_ID,
+  key: process.env.PUSHER_KEY,
+  secret: process.env.PUSHER_SECRET,
+  cluster: process.env.PUSHER_CLUSTER,
+  useTLS: true,
+});
+
+// var pushData = [];
+var phoneIDs = [];
+
+app.post('/greeting', (req, res) => {
+  console.log('req.body', req.body); // { phone: '+15754947093', id: 'a62c1a6f-e4cb-4fb1-ac39-239f5fbe8fb3' }
+  if (req.body.phone && req.body.id) phoneIDs.push(req.body);
   let phone = req.body.phone;
   phoneNumber = phone.replace('+', '');
 
   registerWA(phoneNumber, url, 'incoming', waNumber);
-  sendGreeting(req, res);
+  var textToSend =
+    "Hello, I'm Sierra, the virtual shopping assitant. I can help you when we have new designs available. If you don't want to hear from me again, just select or type LEAVE, otherwise type STAY";
+  sendGreeting(req, res, textToSend);
+  // pushData.push(5);
+  pusher.trigger('greeting', 'add', {
+    pushData: 1,
+  });
 });
 
-app.post('/webhooks/inbound', (req, res) => {
+app.post('/inbound', (req, res) => {
   console.log('🗞️  inbound', req.body);
 
   var text;
@@ -52,7 +73,7 @@ app.post('/webhooks/inbound', (req, res) => {
     }
     // ELSE IF LIST IS SELECTED && DESCRIPTION CONTAINES ADDRESS
   } else {
-    console.log('💀  Unrecognised Incoming message_type');
+    console.log('💀 Unrecognised Incoming message_type');
   }
 
   // IF ADDRESS IS INPUTED && contains address format E.g: 123 Main St Boston, MA 01850
@@ -73,8 +94,11 @@ app.post('/webhooks/inbound', (req, res) => {
       switch (reply) {
         case 'Hello':
           textToSend =
-            'At VIDS Demo, Please enter your number and press Send to begin interactive';
-          sendText(req, res, textToSend);
+            "Hello, I'm Sierra, the virtual shopping assitant. I can help you when we have new designs available. If you don't want to hear from me again, just select or type LEAVE, otherwise type STAY";
+          // sendGreeting(req, res, textToSend); // CAUSES ERROR
+          pusher.trigger('inbound', 'add', {
+            pushData: req.body.text,
+          });
           break;
         case 'LEAVE':
           textToSend =

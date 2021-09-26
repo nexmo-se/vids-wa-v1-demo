@@ -6,7 +6,7 @@ var axios = require('axios');
 var privateKey = process.env.PRIVATE_KEY;
 var current = Date.now();
 
-function sendGreeting(req, res) {
+function sendGreeting(req, res, textToSend) {
   var data = JSON.stringify({
     from: '12019758605', // 12019758605
     to: req.body.phone, // 15754947093
@@ -21,7 +21,7 @@ function sendGreeting(req, res) {
           text: 'Shopping Interactive',
         },
         body: {
-          text: "Hello, I'm Sierra, the virtual shopping assitant. I can help you when we have new designs available. If you don't want to hear from me again, just select or type LEAVE, otherwise type STAY",
+          text: textToSend,
         },
         action: {
           buttons: [

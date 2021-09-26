@@ -21,3 +21,5 @@ npm run dev
 
 [Messages V1 API Reference](https://vonage-messages-v1.herokuapp.com/definitions/messages)
 [react-phone-number-input](https://www.npmjs.com/package/react-phone-number-input)
+[pusher-js](https://www.npmjs.com/package/pusher-js)
+[puhser](https://www.npmjs.com/package/pusher)

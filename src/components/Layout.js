@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import { Button, Grid, Paper } from '@material-ui/core';
 import Icon from '@material-ui/core/Icon';
 import axios from 'axios';
-
+import { v4 as uuidv4 } from 'uuid';
 import Timeline from '@material-ui/lab/Timeline';
 import TimelineItem from '@material-ui/lab/TimelineItem';
 import TimelineSeparator from '@material-ui/lab/TimelineSeparator';
@@ -19,6 +19,8 @@ import Typography from '@material-ui/core/Typography';
 import 'react-phone-number-input/style.css';
 import PhoneInput from 'react-phone-number-input';
 
+import Pusher from 'pusher-js';
+
 const useStyles = makeStyles((theme) => ({
   paper: {
     padding: theme.spacing(1),
@@ -33,7 +35,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function TimeLine(classes) {
+function ConvoState({ state }) {
+  const convoState = state === 0 ? 'primary' : 'secondary';
+  return (
+    <TimelineDot color={convoState} variant="default">
+      <LaptopMacIcon />
+    </TimelineDot>
+  );
+}
+
+function TimeLine({ className, state }) {
   return (
     <Timeline align="alternate">
       <TimelineItem>
@@ -43,32 +54,11 @@ function TimeLine(classes) {
           </Typography>
         </TimelineOppositeContent>
         <TimelineSeparator>
-          <TimelineDot color="secondary" variant="outlined">
-            <Face />
-          </TimelineDot>
-          <TimelineConnector />
-        </TimelineSeparator>
-        <TimelineContent>
-          <Paper elevation={3} className={classes.primaryTail}>
-            <Typography variant="h6" component="h1">
-              User
-            </Typography>
-            <Typography>
-              Type Hello to the WhatsApp Number 12019758605, then enter your
-              Number and press Send to begin.
-            </Typography>
-          </Paper>
-        </TimelineContent>
-      </TimelineItem>
-      <TimelineItem>
-        <TimelineSeparator>
-          <TimelineDot color="primary" variant="default">
-            <LaptopMacIcon />
-          </TimelineDot>
+          <ConvoState state={state} />
           <TimelineConnector />
         </TimelineSeparator>
         <TimelineContent style={{ textAlign: 'center' }}>
-          <Paper elevation={3} className={classes.primaryTail}>
+          <Paper elevation={3} className={className.primaryTail}>
             <Typography variant="h6" component="h1">
               Bot
             </Typography>
@@ -85,10 +75,10 @@ function TimeLine(classes) {
           <TimelineDot color="primary" variant="outlined">
             <Face />
           </TimelineDot>
-          <TimelineConnector className={classes.secondaryTail} />
+          <TimelineConnector className={className.secondaryTail} />
         </TimelineSeparator>
-        <TimelineContent>
-          <Paper elevation={3} className={classes.paper}>
+        <TimelineContent style={{ textAlign: 'center' }}>
+          <Paper elevation={3} className={className.paper}>
             <Typography variant="h6" component="h1">
               User
             </Typography>
@@ -104,7 +94,7 @@ function TimeLine(classes) {
           <TimelineConnector />
         </TimelineSeparator>
         <TimelineContent style={{ textAlign: 'center' }}>
-          <Paper elevation={3} className={classes.primaryTail}>
+          <Paper elevation={3} className={className.primaryTail}>
             <Typography variant="h6" component="h1">
               Bot
             </Typography>
@@ -120,10 +110,10 @@ function TimeLine(classes) {
           <TimelineDot color="primary" variant="outlined">
             <Face />
           </TimelineDot>
-          <TimelineConnector className={classes.secondaryTail} />
+          <TimelineConnector className={className.secondaryTail} />
         </TimelineSeparator>
-        <TimelineContent>
-          <Paper elevation={3} className={classes.paper}>
+        <TimelineContent style={{ textAlign: 'center' }}>
+          <Paper elevation={3} className={className.paper}>
             <Typography variant="h6" component="h1">
               User
             </Typography>
@@ -139,7 +129,7 @@ function TimeLine(classes) {
           <TimelineConnector />
         </TimelineSeparator>
         <TimelineContent style={{ textAlign: 'center' }}>
-          <Paper elevation={3} className={classes.primaryTail}>
+          <Paper elevation={3} className={className.primaryTail}>
             <Typography variant="h6" component="h1">
               Bot
             </Typography>
@@ -155,10 +145,10 @@ function TimeLine(classes) {
           <TimelineDot color="primary" variant="outlined">
             <Face />
           </TimelineDot>
-          <TimelineConnector className={classes.secondaryTail} />
+          <TimelineConnector className={className.secondaryTail} />
         </TimelineSeparator>
-        <TimelineContent>
-          <Paper elevation={3} className={classes.paper}>
+        <TimelineContent style={{ textAlign: 'center' }}>
+          <Paper elevation={3} className={className.paper}>
             <Typography variant="h6" component="h1">
               User
             </Typography>
@@ -174,7 +164,7 @@ function TimeLine(classes) {
           <TimelineConnector />
         </TimelineSeparator>
         <TimelineContent style={{ textAlign: 'center' }}>
-          <Paper elevation={3} className={classes.primaryTail}>
+          <Paper elevation={3} className={className.primaryTail}>
             <Typography variant="h6" component="h1">
               Bot
             </Typography>
@@ -190,10 +180,10 @@ function TimeLine(classes) {
           <TimelineDot color="primary" variant="outlined">
             <Face />
           </TimelineDot>
-          <TimelineConnector className={classes.secondaryTail} />
+          <TimelineConnector className={className.secondaryTail} />
         </TimelineSeparator>
-        <TimelineContent>
-          <Paper elevation={3} className={classes.paper}>
+        <TimelineContent style={{ textAlign: 'center' }}>
+          <Paper elevation={3} className={className.paper}>
             <Typography variant="h6" component="h1">
               User
             </Typography>
@@ -209,7 +199,7 @@ function TimeLine(classes) {
           <TimelineConnector />
         </TimelineSeparator>
         <TimelineContent style={{ textAlign: 'center' }}>
-          <Paper elevation={3} className={classes.primaryTail}>
+          <Paper elevation={3} className={className.primaryTail}>
             <Typography variant="h6" component="h1">
               Bot
             </Typography>
@@ -225,10 +215,10 @@ function TimeLine(classes) {
           <TimelineDot color="primary" variant="outlined">
             <Face />
           </TimelineDot>
-          <TimelineConnector className={classes.secondaryTail} />
+          <TimelineConnector className={className.secondaryTail} />
         </TimelineSeparator>
-        <TimelineContent>
-          <Paper elevation={3} className={classes.paper}>
+        <TimelineContent style={{ textAlign: 'center' }}>
+          <Paper elevation={3} className={className.paper}>
             <Typography variant="h6" component="h1">
               User
             </Typography>
@@ -246,7 +236,7 @@ function TimeLine(classes) {
           <TimelineConnector />
         </TimelineSeparator>
         <TimelineContent style={{ textAlign: 'center' }}>
-          <Paper elevation={3} className={classes.primaryTail}>
+          <Paper elevation={3} className={className.primaryTail}>
             <Typography variant="h6" component="h1">
               Bot
             </Typography>
@@ -262,10 +252,10 @@ function TimeLine(classes) {
           <TimelineDot color="primary" variant="outlined">
             <Face />
           </TimelineDot>
-          <TimelineConnector className={classes.secondaryTail} />
+          <TimelineConnector className={className.secondaryTail} />
         </TimelineSeparator>
-        <TimelineContent>
-          <Paper elevation={3} className={classes.paper}>
+        <TimelineContent style={{ textAlign: 'center' }}>
+          <Paper elevation={3} className={className.paper}>
             <Typography variant="h6" component="h1">
               User
             </Typography>
@@ -274,13 +264,18 @@ function TimeLine(classes) {
         </TimelineContent>
       </TimelineItem>
       <TimelineItem>
+        <TimelineOppositeContent>
+          <Typography variant="body2" color="textSecondary">
+            Finish
+          </Typography>
+        </TimelineOppositeContent>
         <TimelineSeparator>
-          <TimelineDot color="secondary" variant="default">
+          <TimelineDot color="primary" variant="default">
             <LaptopMacIcon />
           </TimelineDot>
         </TimelineSeparator>
         <TimelineContent style={{ textAlign: 'center' }}>
-          <Paper elevation={3} className={classes.paper}>
+          <Paper elevation={3} className={className.paper}>
             <Typography variant="h6" component="h1">
               Bot
             </Typography>
@@ -297,8 +292,33 @@ function TimeLine(classes) {
 function Layout() {
   const [error, setError] = useState(null);
   const [value, setValue] = useState('');
-  const [whatsapp, setWhatsapp] = useState([]);
   const [response, setResponse] = useState('');
+  const [pusherData, setPusherData] = useState(0);
+
+  useEffect(() => {
+    Pusher.logToConsole = true;
+    // pusher key
+    var pusher = new Pusher('70a80d4e6027ca36af18', {
+      cluster: 'us2',
+      forceTLS: true,
+    });
+    // For /greeting endpoint
+    var channelGreeting = pusher.subscribe('greeting');
+    channelGreeting.bind('add', function (data) {
+      console.log('data.pushData', data.pushData);
+      setPusherData(data.pushData);
+    });
+
+    var channelInbound = pusher.subscribe('inbound');
+    channelInbound.bind('add', function (data) {
+      console.log('data.pushData', data.pushData);
+      setPusherData(data.pushData);
+    });
+    return () => {
+      pusher.unsubscribe('greeting');
+      pusher.unsubscribe('inbound');
+    };
+  }, []);
 
   const classes = useStyles();
 
@@ -306,12 +326,12 @@ function Layout() {
     event.preventDefault();
     const object = {
       phone: value,
+      id: uuidv4(),
     };
     await axios
-      .post('/sendWhatsapp', object)
+      .post('/greeting', object)
       .then((res) => {
         console.log('res.data:', res.data[0].message_uuid);
-        // setWhatsapp(res.data);
         setResponse(res.data[0].message_uuid);
       })
       .catch((error) => {
@@ -432,7 +452,10 @@ function Layout() {
         {/* RIGHT BODY */}
         <Grid item container xs={12} sm={12} md={8} justifyContent="flex-end">
           <Grid item sm={12}>
-            <TimeLine className={classes} />
+            <Typography variant="h6" align="center">
+              {pusherData}
+            </Typography>
+            <TimeLine className={classes} state={pusherData} />
           </Grid>
         </Grid>
       </Grid>
