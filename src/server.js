@@ -33,7 +33,7 @@ const pusher = new Pusher({
   key: process.env.PUSHER_KEY,
   secret: process.env.PUSHER_SECRET,
   cluster: process.env.PUSHER_CLUSTER,
-  useTLS: true,
+  useTLS: process.env.PUSHER_USE_TLS,
 });
 
 // var pushData = [];
@@ -50,9 +50,14 @@ app.post('/greeting', (req, res) => {
     "Hello, I'm Sierra, the virtual shopping assitant. I can help you when we have new designs available. If you don't want to hear from me again, just select or type LEAVE, otherwise type STAY";
   sendGreeting(req, res, textToSend);
   // pushData.push(5);
-  pusher.trigger('greeting', 'add', {
-    pushData: 1,
-  });
+  // name of channel
+  var channel = 'greeting';
+  // name of event. You can have as many event names as you want
+  var event = 'add';
+  // Create a JSON object with whatever you want, then send it to the channel/event
+  // In the Frontend, we are listening to the channel, for the events, and will receive the data
+  var data = { pushData: { state: 1, text: '' } };
+  pusher.trigger(channel, event, data);
 });
 
 app.post('/inbound', (req, res) => {
@@ -67,7 +72,7 @@ app.post('/inbound', (req, res) => {
     reply = req.body.text;
     // ELSE IF BUTTON OR LIST IS SELECTED
   } else if (req.body.message_type === 'reply') {
-    reply = req.body.reply.title;
+    reply = req.body.reply.title; // LEAVE
     if (req.body.reply.description) {
       replyAddress = req.body.reply.description;
     }
@@ -94,29 +99,57 @@ app.post('/inbound', (req, res) => {
       switch (reply) {
         case 'Hello':
           textToSend =
-            "Hello, I'm Sierra, the virtual shopping assitant. I can help you when we have new designs available. If you don't want to hear from me again, just select or type LEAVE, otherwise type STAY";
+            "Hello, I'm the Virtual Shopping Assitant. Would you like to hear about our new items? If not, select LEAVE, otherwise select STAY";
           // sendGreeting(req, res, textToSend); // CAUSES ERROR
+          res.status(200).end();
           pusher.trigger('inbound', 'add', {
-            pushData: req.body.text,
+            pushData: {
+              state: 1,
+              text: '',
+            },
           });
           break;
         case 'LEAVE':
           textToSend =
             'Sorry to see you leave. You can visit Vonage-Shopping.com to opt into the virtual assistant again. Good Bye!';
           sendText(req, res, textToSend);
+          pusher.trigger('inbound', 'add', {
+            pushData: {
+              state: 2,
+              text: req.body.reply.title,
+            },
+          });
           break;
         case 'STAY':
           textToSend =
-            'Fabulous. Let’s start with shirt colors. Are you looking for a light color or dark color shirt';
+            'Fabulous. Let’s start with shirt colors. Are you looking for a LIGHT or DARK color shirt';
           lightOrDark(req, res, textToSend);
+          pusher.trigger('inbound', 'add', {
+            pushData: {
+              state: 2,
+              text: req.body.reply.title,
+            },
+          });
           break;
         case 'LIGHT':
           textToSend = 'light';
           sendListShade(req, res, textToSend);
+          pusher.trigger('inbound', 'add', {
+            pushData: {
+              state: 3,
+              text: req.body.reply.title,
+            },
+          });
           break;
         case 'DARK':
           textToSend = 'dark';
           sendListShade(req, res, textToSend);
+          pusher.trigger('inbound', 'add', {
+            pushData: {
+              state: 3,
+              text: req.body.reply.title,
+            },
+          });
           break;
         case 'Red':
           textToSend = 'Red';

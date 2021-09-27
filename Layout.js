@@ -31,11 +31,20 @@ const useStyles = makeStyles((theme) => ({
     padding: '6px 16px',
   },
   secondaryTail: {
-    backgroundColor: theme.palette.primary.main,
+    backgroundColor: theme.palette.secondary.main,
   },
 }));
 
-function TimeLine({ className, pusherData }) {
+function ConvoState({ state }) {
+  const convoState = state === 0 ? 'outlined' : 'default';
+  return (
+    <TimelineDot color="primary" variant={convoState}>
+      <LaptopMacIcon />
+    </TimelineDot>
+  );
+}
+
+function TimeLine({ className, state }) {
   return (
     <Timeline align="alternate">
       <TimelineItem>
@@ -44,23 +53,18 @@ function TimeLine({ className, pusherData }) {
             Start
           </Typography>
         </TimelineOppositeContent>
-
-        {pusherData.state === 0 ? (
-          <TimelineSeparator>
+        <TimelineSeparator>
+          {state === 0 ? (
             <TimelineDot color="primary" variant="outlined">
               <LaptopMacIcon />
             </TimelineDot>
-            <TimelineConnector />
-          </TimelineSeparator>
-        ) : (
-          <TimelineSeparator>
+          ) : (
             <TimelineDot color="primary" variant="default">
               <LaptopMacIcon />
             </TimelineDot>
-            <TimelineConnector className={className.secondaryTail} />
-          </TimelineSeparator>
-        )}
-
+          )}
+          <TimelineConnector />
+        </TimelineSeparator>
         <TimelineContent style={{ textAlign: 'center' }}>
           <Paper elevation={3} className={className.primaryTail}>
             <Typography variant="h6" component="h1">
@@ -75,86 +79,40 @@ function TimeLine({ className, pusherData }) {
         </TimelineContent>
       </TimelineItem>
       <TimelineItem>
-        {pusherData.state === 2 ? (
-          <>
-            <TimelineSeparator>
-              <TimelineDot color="primary" variant="default">
-                <Face />
-              </TimelineDot>
-              <TimelineConnector className={className.secondaryTail} />
-            </TimelineSeparator>
-            <TimelineContent style={{ textAlign: 'center' }}>
-              <Paper elevation={3} className={className.paper}>
-                <Typography variant="h6" component="h1">
-                  User
-                </Typography>
-                <Typography>Selects STAY</Typography>
-              </Paper>
-            </TimelineContent>
-          </>
-        ) : (
-          <>
-            <TimelineSeparator>
-              <TimelineDot color="primary" variant="outlined">
-                <Face />
-              </TimelineDot>
-              <TimelineConnector />
-            </TimelineSeparator>
-            <TimelineContent style={{ textAlign: 'center' }}>
-              <Paper elevation={3} className={className.paper}>
-                <Typography variant="h6" component="h1">
-                  User
-                </Typography>
-                <Typography>Selects DARK</Typography>
-              </Paper>
-            </TimelineContent>
-          </>
-        )}
+        <TimelineSeparator>
+          <TimelineDot color="primary" variant="outlined">
+            <Face />
+          </TimelineDot>
+          <TimelineConnector />
+        </TimelineSeparator>
+        <TimelineContent style={{ textAlign: 'center' }}>
+          <Paper elevation={3} className={className.paper}>
+            <Typography variant="h6" component="h1">
+              User
+            </Typography>
+            <Typography>Selects STAY</Typography>
+          </Paper>
+        </TimelineContent>
       </TimelineItem>
       <TimelineItem>
-        {pusherData.state === 2 ? (
-          <>
-            <TimelineSeparator>
-              <TimelineDot color="primary" variant="default">
-                <LaptopMacIcon />
-              </TimelineDot>
-              <TimelineConnector />
-            </TimelineSeparator>
-            <TimelineContent style={{ textAlign: 'center' }}>
-              <Paper elevation={3} className={className.primaryTail}>
-                <Typography variant="h6" component="h1">
-                  Bot
-                </Typography>
-                <Typography>
-                  Fabulous. Let&apos;s start with shirt colors. Are you looking
-                  for a LIGHT or DARK color shirt?
-                </Typography>
-              </Paper>
-            </TimelineContent>
-          </>
-        ) : (
-          <>
-            <TimelineSeparator>
-              <TimelineDot color="primary" variant="outlined">
-                <LaptopMacIcon />
-              </TimelineDot>
-              <TimelineConnector />
-            </TimelineSeparator>
-            <TimelineContent style={{ textAlign: 'center' }}>
-              <Paper elevation={3} className={className.primaryTail}>
-                <Typography variant="h6" component="h1">
-                  Bot
-                </Typography>
-                <Typography>
-                  Fabulous. Let&apos;s start with shirt colors. Are you looking
-                  for a LIGHT or DARK color shirt?
-                </Typography>
-              </Paper>
-            </TimelineContent>
-          </>
-        )}
+        <TimelineSeparator>
+          <TimelineDot color="primary" variant="outlined">
+            <LaptopMacIcon />
+          </TimelineDot>
+          <TimelineConnector />
+        </TimelineSeparator>
+        <TimelineContent style={{ textAlign: 'center' }}>
+          <Paper elevation={3} className={className.primaryTail}>
+            <Typography variant="h6" component="h1">
+              Bot
+            </Typography>
+            <Typography>
+              Fabulous. Let&apos;s start with shirt colors. Are you looking for
+              a LIGHT or DARK color shirt?
+            </Typography>
+          </Paper>
+        </TimelineContent>
       </TimelineItem>
-
       <TimelineItem>
         <TimelineSeparator>
           <TimelineDot color="primary" variant="outlined">
@@ -189,7 +147,6 @@ function TimeLine({ className, pusherData }) {
             </Typography>
           </Paper>
         </TimelineContent>
-        
       </TimelineItem>
       <TimelineItem>
         <TimelineSeparator>
@@ -486,7 +443,7 @@ function Layout() {
                   </Typography>
                   <Typography variant="body1">
                     {error}
-                    {pusherData.text ? <>User Selected {pusherData.text}</> : null}
+                    {response}
                     {/* {whatsapp.map((item, index) => {
                       return (
                         <div key={index}>
@@ -507,7 +464,7 @@ function Layout() {
               {pusherData.state}
               {pusherData.text}
             </Typography>
-            <TimeLine className={classes} pusherData={pusherData} />
+            <TimeLine className={classes} state={pusherData.state} />
           </Grid>
         </Grid>
       </Grid>

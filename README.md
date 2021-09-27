@@ -17,9 +17,27 @@ npm install nodemon concurrently --save-dev
 npm run dev
 ```
 
-### Libraries:
+### Libraries
 
 [Messages V1 API Reference](https://vonage-messages-v1.herokuapp.com/definitions/messages)
 [react-phone-number-input](https://www.npmjs.com/package/react-phone-number-input)
 [pusher-js](https://www.npmjs.com/package/pusher-js)
 [puhser](https://www.npmjs.com/package/pusher)
+
+### UI Notes
+
+Color:
+
+- primary = blue
+- secondary = red
+
+Variant:
+
+- outlined
+- default
+
+```js
+<TimelineDot color="primary | secondary" variant="outlined | default">
+  <Face />
+</TimelineDot>
+```
