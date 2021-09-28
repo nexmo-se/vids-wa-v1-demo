@@ -35,6 +35,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+var uuid = uuidv4()
+
 function TimeLine({ className, pusherData }) {
   return (
     <Timeline align="alternate">
@@ -556,10 +558,13 @@ function TimeLine({ className, pusherData }) {
 function Layout() {
   const [error, setError] = useState(null);
   const [value, setValue] = useState('');
-  const [response, setResponse] = useState('');
+  const [id, setID] = useState(uuid);
   const [pusherData, setPusherData] = useState({ state: 0, text: '' });
 
+  // Subscribe to all Channels when Component mounted
+  // Problem is state id is not set until ButtonClicked
   useEffect(() => {
+    console.log("ID:", id);
     Pusher.logToConsole = true;
     // pusher key
     var pusher = new Pusher('70a80d4e6027ca36af18', {
@@ -568,13 +573,13 @@ function Layout() {
     });
     // For /greeting endpoint
     var channelGreeting = pusher.subscribe('greeting');
-    channelGreeting.bind('add', function (data) {
+    channelGreeting.bind(id, function (data) {
       console.log('data.pushData', data.pushData);
       setPusherData(data.pushData);
     });
 
     var channelInbound = pusher.subscribe('inbound');
-    channelInbound.bind('add', function (data) {
+    channelInbound.bind(id, function (data) {
       console.log('data.pushData', data.pushData);
       setPusherData(data.pushData);
     });
@@ -582,7 +587,7 @@ function Layout() {
       pusher.unsubscribe('greeting');
       pusher.unsubscribe('inbound');
     };
-  }, []);
+  }, [id]);
 
   const classes = useStyles();
 
@@ -590,13 +595,15 @@ function Layout() {
     event.preventDefault();
     const object = {
       phone: value,
-      id: uuidv4(),
+      id: uuid,
     };
     await axios
       .post('/greeting', object)
       .then((res) => {
-        console.log('res.data:', res.data[0].message_uuid);
-        setResponse(res.data[0].message_uuid);
+        // console.log('res.data:', res.data[0].message_uuid);
+        console.log('res.data', res.data)
+        // setID(res.data[0].message_uuid);
+        // setID(res.data.body.phone)
       })
       .catch((error) => {
         setError(error);
@@ -683,7 +690,7 @@ function Layout() {
                     variant="contained"
                     color="primary"
                     endIcon={<Icon>send</Icon>}
-                    onClick={handleClick}
+                    onClick={(e) => {handleClick(e)}}
                   >
                     Send
                   </Button>
@@ -717,6 +724,7 @@ function Layout() {
         <Grid item container xs={12} sm={12} md={8} justifyContent="flex-end">
           <Grid item sm={12}>
             {/* <Typography variant="h6" align="center"> */}
+              {/* {id} */}
               {/* {pusherData.state} */}
               {/* {pusherData.text} */}
             {/* </Typography> */}

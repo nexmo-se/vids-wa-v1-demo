@@ -7,6 +7,7 @@ var privateKey = process.env.PRIVATE_KEY;
 var current = Date.now();
 
 function sendGreeting(req, res, textToSend) {
+  var body = req.body;
   var data = JSON.stringify({
     from: '12019758605', // 12019758605
     to: req.body.phone, // 15754947093
@@ -76,8 +77,10 @@ function sendGreeting(req, res, textToSend) {
           console.log('✅ ', JSON.stringify(response.data));
           var data = [];
           data.push(response.data);
-          // console.log(data[0].message_uuid);
-          res.send(data);
+          // setResponse(res.data[0].message_uuid);
+          console.log(data); // {message_uuid: "1234"}
+          // {{data: [{message_uuid: "1234"}]},{body: {id: "uuid", phone: "+15754947093"}}}
+          res.send({data, body}); 
         })
         .catch(function (error) {
           console.log(error);

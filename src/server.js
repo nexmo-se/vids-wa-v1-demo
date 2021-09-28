@@ -3,6 +3,7 @@ let express = require('express');
 let cookieParser = require('cookie-parser');
 let logger = require('morgan');
 const Pusher = require('pusher');
+// const { v4: uuidv4 } = require('uuid');
 
 let app = express();
 let port = 5000;
@@ -38,26 +39,36 @@ const pusher = new Pusher({
 
 // var pushData = [];
 var phoneIDs = [];
+var ID = ''
+
+function matchID(id) {
+  for (const property in phoneIDs) {
+    console.log(`${property}: ${phoneIDs[property]}`);
+    if (id === property) return phoneIDs[property]
+  }
+}
 
 app.post('/greeting', (req, res) => {
   console.log('req.body', req.body); // { phone: '+15754947093', id: 'a62c1a6f-e4cb-4fb1-ac39-239f5fbe8fb3' }
+  // save object with phone and uuid
   if (req.body.phone && req.body.id) phoneIDs.push(req.body);
   let phone = req.body.phone;
   phoneNumber = phone.replace('+', '');
+  ID = req.body.id
 
   registerWA(phoneNumber, url, 'incoming', waNumber);
   var textToSend =
     "Hello, I'm Sierra, the virtual shopping assitant. I can help you when we have new designs available. If you don't want to hear from me again, just select or type LEAVE, otherwise type STAY";
   sendGreeting(req, res, textToSend);
-  // pushData.push(5);
   // name of channel
   var channel = 'greeting';
   // name of event. You can have as many event names as you want
-  var event = 'add';
+  var event = ID;
   // Create a JSON object with whatever you want, then send it to the channel/event
   // In the Frontend, we are listening to the channel, for the events, and will receive the data
   var data = { pushData: { state: 1, text: '' } };
-  pusher.trigger(channel, event, data);
+  pusher.trigger(channel, req.body.id, data); // req.body.id == uuid
+  
 });
 
 app.post('/inbound', (req, res) => {
@@ -85,7 +96,7 @@ app.post('/inbound', (req, res) => {
   if (/\d+ ([^,]+), ([A-Z]{2}) (\d{5})/.test(text)) {
     console.log('✅ Valid address to compare');
     getCoordinate(req, res, text);
-    pusher.trigger('inbound', 'add', {
+    pusher.trigger('inbound', ID, {
       pushData: {
         state: 6,
         text: req.body.text,
@@ -96,7 +107,7 @@ app.post('/inbound', (req, res) => {
   } else if (reply && /(\d{5})/.test(replyAddress)) {
     console.log('✅ Valid address');
     getOneCoordinate(req, res, replyAddress);
-    pusher.trigger('inbound', 'add', {
+    pusher.trigger('inbound', ID, {
       pushData: {
         state: 7,
         text: req.body.reply.title,
@@ -114,7 +125,7 @@ app.post('/inbound', (req, res) => {
             "Hello, I'm the Virtual Shopping Assitant. Would you like to hear about our new items? If not, select LEAVE, otherwise select STAY";
           // sendGreeting(req, res, textToSend); // CAUSES ERROR
           res.status(200).end();
-          pusher.trigger('inbound', 'add', {
+          pusher.trigger('inbound', ID, {
             pushData: {
               state: 1,
               text: '',
@@ -125,7 +136,7 @@ app.post('/inbound', (req, res) => {
           textToSend =
             'Sorry to see you leave. You can visit Vonage-Shopping.com to opt into the virtual assistant again. Good Bye!';
           sendText(req, res, textToSend);
-          pusher.trigger('inbound', 'add', {
+          pusher.trigger('inbound', ID, {
             pushData: {
               state: 0,
               text: req.body.reply.title,
@@ -136,7 +147,7 @@ app.post('/inbound', (req, res) => {
           textToSend =
             'Fabulous. Let’s start with shirt colors. Are you looking for a LIGHT or DARK color shirt';
           lightOrDark(req, res, textToSend);
-          pusher.trigger('inbound', 'add', {
+          pusher.trigger('inbound', ID, {
             pushData: {
               state: 2,
               text: req.body.reply.title,
@@ -146,7 +157,7 @@ app.post('/inbound', (req, res) => {
         case 'LIGHT':
           textToSend = 'light';
           sendListShade(req, res, textToSend);
-          pusher.trigger('inbound', 'add', {
+          pusher.trigger('inbound', ID, {
             pushData: {
               state: 3,
               text: req.body.reply.title,
@@ -156,7 +167,7 @@ app.post('/inbound', (req, res) => {
         case 'DARK':
           textToSend = 'dark';
           sendListShade(req, res, textToSend);
-          pusher.trigger('inbound', 'add', {
+          pusher.trigger('inbound', ID, {
             pushData: {
               state: 3,
               text: req.body.reply.title,
@@ -166,7 +177,7 @@ app.post('/inbound', (req, res) => {
         case 'Red':
           textToSend = 'Red';
           sendBtnImage(req, res, textToSend, baseURL);
-          pusher.trigger('inbound', 'add', {
+          pusher.trigger('inbound', ID, {
             pushData: {
               state: 4,
               text: req.body.reply.title,
@@ -176,7 +187,7 @@ app.post('/inbound', (req, res) => {
         case 'Blue':
           textToSend = 'Blue';
           sendBtnImage(req, res, textToSend, baseURL);
-          pusher.trigger('inbound', 'add', {
+          pusher.trigger('inbound', ID, {
             pushData: {
               state: 4,
               text: req.body.reply.title,
@@ -186,7 +197,7 @@ app.post('/inbound', (req, res) => {
         case 'Green':
           textToSend = 'Green';
           sendBtnImage(req, res, textToSend, baseURL);
-          pusher.trigger('inbound', 'add', {
+          pusher.trigger('inbound', ID, {
             pushData: {
               state: 4,
               text: req.body.reply.title,
@@ -197,7 +208,7 @@ app.post('/inbound', (req, res) => {
           textToSend =
             'Sorry to see you leave. You can visit Vonage-Shopping.com to opt into the virtual assistant again. Good Bye!';
           sendText(req, res, textToSend);
-          pusher.trigger('inbound', 'add', {
+          pusher.trigger('inbound', ID, {
             pushData: {
               state: 0,
               text: req.body.reply.title,
@@ -208,7 +219,7 @@ app.post('/inbound', (req, res) => {
           textToSend =
             'Great, Please type in your address. E.g. 123 Main St Boston, MA 01850';
           sendText(req, res, textToSend);
-          pusher.trigger('inbound', 'add', {
+          pusher.trigger('inbound', ID, {
             pushData: {
               state: 5,
               text: req.body.reply.title,
@@ -219,7 +230,7 @@ app.post('/inbound', (req, res) => {
           textToSend =
             'Sorry to see you leave. You can visit Vonage-Shopping.com to opt into the virtual assistant again. Good Bye!';
           sendText(req, res, textToSend);
-          pusher.trigger('inbound', 'add', {
+          pusher.trigger('inbound', ID, {
             pushData: {
               state: 0,
               text: req.body.reply.title,
@@ -229,7 +240,7 @@ app.post('/inbound', (req, res) => {
         case 'Visit Website':
           textToSend = 'Please visit Vonage-Shopping.com';
           sendText(req, res, textToSend);
-          pusher.trigger('inbound', 'add', {
+          pusher.trigger('inbound', ID, {
             pushData: {
               state: 0,
               text: req.body.reply.title,
@@ -240,7 +251,7 @@ app.post('/inbound', (req, res) => {
           textToSend =
             'Sorry, your input was invalid. For address format E.g. 123 Main St Boston, MA 01850';
           sendText(req, res, textToSend);
-          pusher.trigger('inbound', 'add', {
+          pusher.trigger('inbound', ID, {
             pushData: {
               state: 5,
               text: req.body.reply.title,
