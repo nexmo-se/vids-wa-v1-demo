@@ -410,11 +410,6 @@ function TimeLine({ className, pusherData }) {
         </TimelineContent>
       </TimelineItem>
       <TimelineItem>
-        <TimelineOppositeContent>
-          <Typography variant="body2" color="textSecondary">
-            Start
-          </Typography>
-        </TimelineOppositeContent>
         <TimelineSeparator>
           <TimelineDot color="primary" variant="default">
             <LaptopMacIcon />
@@ -452,11 +447,6 @@ function TimeLine({ className, pusherData }) {
         </TimelineContent>
       </TimelineItem>
       <TimelineItem>
-        <TimelineOppositeContent>
-          <Typography variant="body2" color="textSecondary">
-            Start
-          </Typography>
-        </TimelineOppositeContent>
         <TimelineSeparator>
           <TimelineDot color="primary" variant="outlined">
             <LaptopMacIcon />
@@ -496,6 +486,11 @@ function TimeLine({ className, pusherData }) {
         </TimelineContent>
       </TimelineItem>
       <TimelineItem>
+        <TimelineOppositeContent>
+          <Typography variant="body2" color="textSecondary">
+            End
+          </Typography>
+        </TimelineOppositeContent>
         <TimelineSeparator>
           <TimelineDot color="primary" variant="default">
             <LaptopMacIcon />
@@ -531,6 +526,11 @@ function TimeLine({ className, pusherData }) {
         </TimelineContent>
       </TimelineItem>
       <TimelineItem>
+        <TimelineOppositeContent>
+          <Typography variant="body2" color="textSecondary">
+            End
+          </Typography>
+        </TimelineOppositeContent>
         <TimelineSeparator>
           <TimelineDot color="primary" variant="outlined">
             <LaptopMacIcon />
