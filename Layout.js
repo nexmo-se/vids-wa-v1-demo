@@ -94,6 +94,7 @@ function TimeLine({ className, state }) {
           </Paper>
         </TimelineContent>
       </TimelineItem>
+      
       <TimelineItem>
         <TimelineSeparator>
           <TimelineDot color="primary" variant="outlined">
@@ -113,6 +114,7 @@ function TimeLine({ className, state }) {
           </Paper>
         </TimelineContent>
       </TimelineItem>
+
       <TimelineItem>
         <TimelineSeparator>
           <TimelineDot color="primary" variant="outlined">
@@ -199,6 +201,7 @@ function TimeLine({ className, state }) {
           </Paper>
         </TimelineContent>
       </TimelineItem>
+
       <TimelineItem>
         <TimelineSeparator>
           <TimelineDot color="primary" variant="outlined">
@@ -218,6 +221,7 @@ function TimeLine({ className, state }) {
           </Paper>
         </TimelineContent>
       </TimelineItem>
+
       <TimelineItem>
         <TimelineSeparator>
           <TimelineDot color="primary" variant="outlined">

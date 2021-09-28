@@ -89,7 +89,7 @@ function TimeLine({ className, pusherData }) {
         </TimelineContent>
       </TimelineItem>)}
       
-      {pusherData.state > 1 ? (<TimelineItem>
+      {pusherData.state > 1 ? (<><TimelineItem>
         <TimelineSeparator>
           <TimelineDot color="primary" variant="default">
             <Face />
@@ -106,7 +106,27 @@ function TimeLine({ className, pusherData }) {
             </Typography>
           </Paper>
         </TimelineContent>
-      </TimelineItem>) : (<TimelineItem>
+      </TimelineItem>
+      <TimelineItem>
+        <TimelineSeparator>
+          <TimelineDot color="primary" variant="default">
+            <LaptopMacIcon />
+          </TimelineDot>
+          <TimelineConnector />
+        </TimelineSeparator>
+        <TimelineContent style={{ textAlign: 'center' }}>
+          <Paper elevation={3} className={className.primaryTail}>
+            <Typography variant="h6" component="h1">
+              Bot
+            </Typography>
+            <Typography>
+              Fabulous. Let&apos;s start with shirt colors. Are you looking for
+              a LIGHT or DARK color shirt?
+            </Typography>
+          </Paper>
+        </TimelineContent>
+      </TimelineItem>
+      </>) : (<><TimelineItem>
         <TimelineSeparator>
           <TimelineDot color="primary" variant="outlined">
             <Face />
@@ -123,27 +143,8 @@ function TimeLine({ className, pusherData }) {
             </Typography>
           </Paper>
         </TimelineContent>
-      </TimelineItem>)}
-
-      {pusherData.state > 2 ? (<TimelineItem>
-        <TimelineSeparator>
-          <TimelineDot color="primary" variant="default">
-            <LaptopMacIcon />
-          </TimelineDot>
-          <TimelineConnector />
-        </TimelineSeparator>
-        <TimelineContent style={{ textAlign: 'center' }}>
-          <Paper elevation={3} className={className.primaryTail}>
-            <Typography variant="h6" component="h1">
-              Bot
-            </Typography>
-            <Typography>
-            Fabulous. Let&apos;s start with shirt colors. Are you looking for
-              a LIGHT or DARK color shirt?
-            </Typography>
-          </Paper>
-        </TimelineContent>
-      </TimelineItem>) : (<TimelineItem>
+      </TimelineItem>
+      <TimelineItem>
         <TimelineSeparator>
           <TimelineDot color="primary" variant="outlined">
             <LaptopMacIcon />
@@ -156,14 +157,15 @@ function TimeLine({ className, pusherData }) {
               Bot
             </Typography>
             <Typography>
-            Fabulous. Let&apos;s start with shirt colors. Are you looking for
+              Fabulous. Let&apos;s start with shirt colors. Are you looking for
               a LIGHT or DARK color shirt?
             </Typography>
           </Paper>
         </TimelineContent>
-      </TimelineItem>)}
+      </TimelineItem>
+      </>)}
 
-
+      
 
     </Timeline>
   );
