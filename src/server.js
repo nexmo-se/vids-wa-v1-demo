@@ -85,11 +85,23 @@ app.post('/inbound', (req, res) => {
   if (/\d+ ([^,]+), ([A-Z]{2}) (\d{5})/.test(text)) {
     console.log('✅ Valid address to compare');
     getCoordinate(req, res, text);
+    pusher.trigger('inbound', 'add', {
+      pushData: {
+        state: 6,
+        text: req.body.text,
+      },
+    });
     res.status(200).end();
     // ELSE IF IS A REPLY AND ADDRESS SELECTED HAS ZIPCODE
   } else if (reply && /(\d{5})/.test(replyAddress)) {
     console.log('✅ Valid address');
     getOneCoordinate(req, res, replyAddress);
+    pusher.trigger('inbound', 'add', {
+      pushData: {
+        state: 7,
+        text: req.body.reply.title,
+      },
+    });
     res.status(200).end();
     // HANDLES ALL REPLIES (SELECTIONS OF BUTTONS AND LIST)
   } else {
@@ -115,7 +127,7 @@ app.post('/inbound', (req, res) => {
           sendText(req, res, textToSend);
           pusher.trigger('inbound', 'add', {
             pushData: {
-              state: 2,
+              state: 0,
               text: req.body.reply.title,
             },
           });
@@ -154,38 +166,86 @@ app.post('/inbound', (req, res) => {
         case 'Red':
           textToSend = 'Red';
           sendBtnImage(req, res, textToSend, baseURL);
+          pusher.trigger('inbound', 'add', {
+            pushData: {
+              state: 4,
+              text: req.body.reply.title,
+            },
+          });
           break;
         case 'Blue':
           textToSend = 'Blue';
           sendBtnImage(req, res, textToSend, baseURL);
+          pusher.trigger('inbound', 'add', {
+            pushData: {
+              state: 4,
+              text: req.body.reply.title,
+            },
+          });
           break;
         case 'Green':
           textToSend = 'Green';
           sendBtnImage(req, res, textToSend, baseURL);
+          pusher.trigger('inbound', 'add', {
+            pushData: {
+              state: 4,
+              text: req.body.reply.title,
+            },
+          });
           break;
         case 'Nothing':
           textToSend =
             'Sorry to see you leave. You can visit Vonage-Shopping.com to opt into the virtual assistant again. Good Bye!';
           sendText(req, res, textToSend);
+          pusher.trigger('inbound', 'add', {
+            pushData: {
+              state: 0,
+              text: req.body.reply.title,
+            },
+          });
           break;
         case 'Yes':
           textToSend =
             'Great, Please type in your address. E.g. 123 Main St Boston, MA 01850';
           sendText(req, res, textToSend);
+          pusher.trigger('inbound', 'add', {
+            pushData: {
+              state: 5,
+              text: req.body.reply.title,
+            },
+          });
           break;
         case 'No':
           textToSend =
             'Sorry to see you leave. You can visit Vonage-Shopping.com to opt into the virtual assistant again. Good Bye!';
           sendText(req, res, textToSend);
+          pusher.trigger('inbound', 'add', {
+            pushData: {
+              state: 0,
+              text: req.body.reply.title,
+            },
+          });
           break;
         case 'Visit Website':
           textToSend = 'Please visit Vonage-Shopping.com';
           sendText(req, res, textToSend);
+          pusher.trigger('inbound', 'add', {
+            pushData: {
+              state: 0,
+              text: req.body.reply.title,
+            },
+          });
           break;
         default:
           textToSend =
             'Sorry, your input was invalid. For address format E.g. 123 Main St Boston, MA 01850';
           sendText(req, res, textToSend);
+          pusher.trigger('inbound', 'add', {
+            pushData: {
+              state: 5,
+              text: req.body.reply.title,
+            },
+          });
           break;
       }
     }

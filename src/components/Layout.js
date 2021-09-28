@@ -165,7 +165,389 @@ function TimeLine({ className, pusherData }) {
       </TimelineItem>
       </>)}
 
-      
+      {pusherData.state > 2 ? (<><TimelineItem>
+        <TimelineSeparator>
+          <TimelineDot color="primary" variant="default">
+            <Face />
+          </TimelineDot>
+          <TimelineConnector />
+        </TimelineSeparator>
+        <TimelineContent style={{ textAlign: 'center' }}>
+          <Paper elevation={3} className={className.primaryTail}>
+            <Typography variant="h6" component="h1">
+              User
+            </Typography>
+            <Typography>
+              Select DARK
+            </Typography>
+          </Paper>
+        </TimelineContent>
+      </TimelineItem>
+      <TimelineItem>
+        <TimelineSeparator>
+          <TimelineDot color="primary" variant="default">
+            <LaptopMacIcon />
+          </TimelineDot>
+          <TimelineConnector />
+        </TimelineSeparator>
+        <TimelineContent style={{ textAlign: 'center' }}>
+          <Paper elevation={3} className={className.primaryTail}>
+            <Typography variant="h6" component="h1">
+              Bot
+            </Typography>
+            <Typography>
+              Select which shirt you would like to see. We have this new cotton
+              shirt in stock in multiple light|dark color shirt.
+            </Typography>
+          </Paper>
+        </TimelineContent>
+      </TimelineItem>
+      </>) : (<><TimelineItem>
+        <TimelineSeparator>
+          <TimelineDot color="primary" variant="outlined">
+            <Face />
+          </TimelineDot>
+          <TimelineConnector />
+        </TimelineSeparator>
+        <TimelineContent style={{ textAlign: 'center' }}>
+          <Paper elevation={3} className={className.primaryTail}>
+            <Typography variant="h6" component="h1">
+              User
+            </Typography>
+            <Typography>
+              Select DARK
+            </Typography>
+          </Paper>
+        </TimelineContent>
+      </TimelineItem>
+      <TimelineItem>
+        <TimelineSeparator>
+          <TimelineDot color="primary" variant="outlined">
+            <LaptopMacIcon />
+          </TimelineDot>
+          <TimelineConnector />
+        </TimelineSeparator>
+        <TimelineContent style={{ textAlign: 'center' }}>
+          <Paper elevation={3} className={className.primaryTail}>
+            <Typography variant="h6" component="h1">
+              Bot
+            </Typography>
+            <Typography>
+              Select which shirt you would like to see. We have this new cotton
+              shirt in stock in multiple light|dark colors.
+            </Typography>
+          </Paper>
+        </TimelineContent>
+      </TimelineItem>
+      </>)}
+
+      {pusherData.state > 3 ? (<><TimelineItem>
+        <TimelineSeparator>
+          <TimelineDot color="primary" variant="default">
+            <Face />
+          </TimelineDot>
+          <TimelineConnector />
+        </TimelineSeparator>
+        <TimelineContent style={{ textAlign: 'center' }}>
+          <Paper elevation={3} className={className.primaryTail}>
+            <Typography variant="h6" component="h1">
+              User
+            </Typography>
+            <Typography>
+              Select color, then press Send.
+            </Typography>
+          </Paper>
+        </TimelineContent>
+      </TimelineItem>
+      <TimelineItem>
+        <TimelineSeparator>
+          <TimelineDot color="primary" variant="default">
+            <LaptopMacIcon />
+          </TimelineDot>
+          <TimelineConnector />
+        </TimelineSeparator>
+        <TimelineContent style={{ textAlign: 'center' }}>
+          <Paper elevation={3} className={className.primaryTail}>
+            <Typography variant="h6" component="h1">
+              Bot
+            </Typography>
+            <Typography>
+              Here's our color short sleeve shirt. Would you like to order?
+              Press Yes to find a store near you.
+            </Typography>
+          </Paper>
+        </TimelineContent>
+      </TimelineItem>
+      </>) : (<><TimelineItem>
+        <TimelineSeparator>
+          <TimelineDot color="primary" variant="outlined">
+            <Face />
+          </TimelineDot>
+          <TimelineConnector />
+        </TimelineSeparator>
+        <TimelineContent style={{ textAlign: 'center' }}>
+          <Paper elevation={3} className={className.primaryTail}>
+            <Typography variant="h6" component="h1">
+              User
+            </Typography>
+            <Typography>
+            Select color, then press Send.
+            </Typography>
+          </Paper>
+        </TimelineContent>
+      </TimelineItem>
+      <TimelineItem>
+        <TimelineSeparator>
+          <TimelineDot color="primary" variant="outlined">
+            <LaptopMacIcon />
+          </TimelineDot>
+          <TimelineConnector />
+        </TimelineSeparator>
+        <TimelineContent style={{ textAlign: 'center' }}>
+          <Paper elevation={3} className={className.primaryTail}>
+            <Typography variant="h6" component="h1">
+              Bot
+            </Typography>
+            <Typography>
+              Here's our color short sleeve shirt. Would you like to order?
+              Press Yes to find a store near you.
+            </Typography>
+          </Paper>
+        </TimelineContent>
+      </TimelineItem>
+      </>)}
+
+      {pusherData.state > 4 ? (<><TimelineItem>
+        <TimelineSeparator>
+          <TimelineDot color="primary" variant="default">
+            <Face />
+          </TimelineDot>
+          <TimelineConnector />
+        </TimelineSeparator>
+        <TimelineContent style={{ textAlign: 'center' }}>
+          <Paper elevation={3} className={className.primaryTail}>
+            <Typography variant="h6" component="h1">
+              User
+            </Typography>
+            <Typography>
+              Select YES
+            </Typography>
+          </Paper>
+        </TimelineContent>
+      </TimelineItem>
+      <TimelineItem>
+        <TimelineSeparator>
+          <TimelineDot color="primary" variant="default">
+            <LaptopMacIcon />
+          </TimelineDot>
+          <TimelineConnector />
+        </TimelineSeparator>
+        <TimelineContent style={{ textAlign: 'center' }}>
+          <Paper elevation={3} className={className.primaryTail}>
+            <Typography variant="h6" component="h1">
+              Bot
+            </Typography>
+            <Typography>
+              Great, Please type in your address. E.g. 123 Main St Boston, MA 01850
+            </Typography>
+          </Paper>
+        </TimelineContent>
+      </TimelineItem>
+      </>) : (<><TimelineItem>
+        <TimelineSeparator>
+          <TimelineDot color="primary" variant="outlined">
+            <Face />
+          </TimelineDot>
+          <TimelineConnector />
+        </TimelineSeparator>
+        <TimelineContent style={{ textAlign: 'center' }}>
+          <Paper elevation={3} className={className.primaryTail}>
+            <Typography variant="h6" component="h1">
+              User
+            </Typography>
+            <Typography>
+            Select YES
+            </Typography>
+          </Paper>
+        </TimelineContent>
+      </TimelineItem>
+      <TimelineItem>
+        <TimelineSeparator>
+          <TimelineDot color="primary" variant="outlined">
+            <LaptopMacIcon />
+          </TimelineDot>
+          <TimelineConnector />
+        </TimelineSeparator>
+        <TimelineContent style={{ textAlign: 'center' }}>
+          <Paper elevation={3} className={className.primaryTail}>
+            <Typography variant="h6" component="h1">
+              Bot
+            </Typography>
+            <Typography>
+              Great, Please type in your address. E.g. 123 Main St Boston, MA 01850
+            </Typography>
+          </Paper>
+        </TimelineContent>
+      </TimelineItem>
+      </>)}
+
+      {pusherData.state > 5 ? (<><TimelineItem>
+        <TimelineSeparator>
+          <TimelineDot color="primary" variant="default">
+            <Face />
+          </TimelineDot>
+          <TimelineConnector />
+        </TimelineSeparator>
+        <TimelineContent style={{ textAlign: 'center' }}>
+          <Paper elevation={3} className={className.primaryTail}>
+            <Typography variant="h6" component="h1">
+              User
+            </Typography>
+            <Typography>
+              Enter address E.g. 2500 Main Street Las Cruces, NM 88011
+            </Typography>
+          </Paper>
+        </TimelineContent>
+      </TimelineItem>
+      <TimelineItem>
+        <TimelineOppositeContent>
+          <Typography variant="body2" color="textSecondary">
+            Start
+          </Typography>
+        </TimelineOppositeContent>
+        <TimelineSeparator>
+          <TimelineDot color="primary" variant="default">
+            <LaptopMacIcon />
+          </TimelineDot>
+          <TimelineConnector />
+        </TimelineSeparator>
+        <TimelineContent style={{ textAlign: 'center' }}>
+          <Paper elevation={3} className={className.primaryTail}>
+            <Typography variant="h6" component="h1">
+              Bot
+            </Typography>
+            <Typography>
+              List of stores closest to your address. Please select one in the
+              list. There are no wrong choices.
+            </Typography>
+          </Paper>
+        </TimelineContent>
+      </TimelineItem>
+      </>) : (<><TimelineItem>
+        <TimelineSeparator>
+          <TimelineDot color="primary" variant="outlined">
+            <Face />
+          </TimelineDot>
+          <TimelineConnector />
+        </TimelineSeparator>
+        <TimelineContent style={{ textAlign: 'center' }}>
+          <Paper elevation={3} className={className.primaryTail}>
+            <Typography variant="h6" component="h1">
+              User
+            </Typography>
+            <Typography>
+              Enter address E.g. 2500 Main Street Las Cruces, NM 88011
+            </Typography>
+          </Paper>
+        </TimelineContent>
+      </TimelineItem>
+      <TimelineItem>
+        <TimelineOppositeContent>
+          <Typography variant="body2" color="textSecondary">
+            Start
+          </Typography>
+        </TimelineOppositeContent>
+        <TimelineSeparator>
+          <TimelineDot color="primary" variant="outlined">
+            <LaptopMacIcon />
+          </TimelineDot>
+          <TimelineConnector />
+        </TimelineSeparator>
+        <TimelineContent style={{ textAlign: 'center' }}>
+          <Paper elevation={3} className={className.primaryTail}>
+            <Typography variant="h6" component="h1">
+              Bot
+            </Typography>
+            <Typography>
+              List of stores closest to your address. Please select one in the
+              list. There are no wrong choices.
+            </Typography>
+          </Paper>
+        </TimelineContent>
+      </TimelineItem>
+      </>)}
+
+      {pusherData.state > 6 ? (<><TimelineItem>
+        <TimelineSeparator>
+          <TimelineDot color="primary" variant="default">
+            <Face />
+          </TimelineDot>
+          <TimelineConnector />
+        </TimelineSeparator>
+        <TimelineContent style={{ textAlign: 'center' }}>
+          <Paper elevation={3} className={className.primaryTail}>
+            <Typography variant="h6" component="h1">
+              User
+            </Typography>
+            <Typography>
+              Selects one address, then press Send.
+            </Typography>
+          </Paper>
+        </TimelineContent>
+      </TimelineItem>
+      <TimelineItem>
+        <TimelineSeparator>
+          <TimelineDot color="primary" variant="default">
+            <LaptopMacIcon />
+          </TimelineDot>
+        </TimelineSeparator>
+        <TimelineContent style={{ textAlign: 'center' }}>
+          <Paper elevation={3} className={className.primaryTail}>
+            <Typography variant="h6" component="h1">
+              Bot
+            </Typography>
+            <Typography>
+              Send location to nearest store. Demo has completed.
+            </Typography>
+          </Paper>
+        </TimelineContent>
+      </TimelineItem>
+      </>) : (<><TimelineItem>
+        <TimelineSeparator>
+          <TimelineDot color="primary" variant="outlined">
+            <Face />
+          </TimelineDot>
+          <TimelineConnector />
+        </TimelineSeparator>
+        <TimelineContent style={{ textAlign: 'center' }}>
+          <Paper elevation={3} className={className.primaryTail}>
+            <Typography variant="h6" component="h1">
+              User
+            </Typography>
+            <Typography>
+              Selects one address, then press Send.
+            </Typography>
+          </Paper>
+        </TimelineContent>
+      </TimelineItem>
+      <TimelineItem>
+        <TimelineSeparator>
+          <TimelineDot color="primary" variant="outlined">
+            <LaptopMacIcon />
+          </TimelineDot>
+        </TimelineSeparator>
+        <TimelineContent style={{ textAlign: 'center' }}>
+          <Paper elevation={3} className={className.primaryTail}>
+            <Typography variant="h6" component="h1">
+              Bot
+            </Typography>
+            <Typography>
+              Send location to nearest store. Demo has completed.
+            </Typography>
+          </Paper>
+        </TimelineContent>
+      </TimelineItem>
+      </>)}
 
     </Timeline>
   );
@@ -334,10 +716,10 @@ function Layout() {
         {/* RIGHT BODY */}
         <Grid item container xs={12} sm={12} md={8} justifyContent="flex-end">
           <Grid item sm={12}>
-            <Typography variant="h6" align="center">
-              {pusherData.state}
-              {pusherData.text}
-            </Typography>
+            {/* <Typography variant="h6" align="center"> */}
+              {/* {pusherData.state} */}
+              {/* {pusherData.text} */}
+            {/* </Typography> */}
             <TimeLine className={classes} pusherData={pusherData} />
           </Grid>
         </Grid>
