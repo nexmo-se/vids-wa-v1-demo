@@ -1,0 +1,12 @@
+{
+	"to": "447700900000",
+	"from": "447700900001",
+	"channel": "whatsapp",
+	"message_uuid": "f2c98812-cfdc-45dd-bd6d-74275d1b23da",
+	"timestamp": "2021-08-07T19:01:16Z",
+	"message_type": "reply",
+	"reply": {
+		"id": "slot-2",
+		"title": "16:30"
+	}
+}

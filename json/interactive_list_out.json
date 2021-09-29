@@ -1,0 +1,57 @@
+{
+  "from": "12013814467",
+  "to": "447815295203",
+  "channel": "whatsapp",
+  "message_type": "custom",
+  "custom": {
+    "type": "interactive",
+    "interactive": {
+      "type": "list",
+      "header": {
+        "type": "text",
+        "text": "Select which pill you would like "
+      },
+      "body": {
+        "text": "You will be presented with a list of options"
+      },
+      "footer": {
+        "text": "There are no wrong choices"
+      },
+      "action": {
+        "button": "Select",
+        "sections": [
+          {
+            "title": "Section A - pills",
+            "rows": [
+              {
+                "id": "row1",
+                "title": "Red",
+                "description": "Take the red pill"
+              },
+              {
+                "id": "row2",
+                "title": "Blue",
+                "description": "Take the blue pill"
+              },
+              {
+                "id": "row3",
+                "title": "Green",
+                "description": "Take the green pill"
+              }
+            ]
+          },
+          {
+            "title": "Section B - no pills",
+            "rows": [
+              {
+                "id": "row4",
+                "title": "Nothing",
+                "description": "Don't take a pill"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

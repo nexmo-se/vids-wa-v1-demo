@@ -264,18 +264,18 @@ app.post('/inbound', (req, res) => {
   }
 });
 
-app.post('/webhooks/status', (req, res) => {
+app.post('/status', (req, res) => {
   console.log('Message', req.body.status);
 
   res.status(200).end();
 });
 
-app.post('/webhooks/event', (req, res) => {
+app.post('/event', (req, res) => {
   console.log('event', req.body);
   res.status(200).end();
 });
 
-app.get('/webhooks/delivery-receipt', (req, res) => {
+app.get('/delivery-receipt', (req, res) => {
   // console.log('event', req.body);
   res.status(200).end();
 });

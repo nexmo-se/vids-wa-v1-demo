@@ -1,0 +1,47 @@
+{
+    "from": "12013814467",
+    "to": "447815295203",
+    "channel": "whatsapp",
+    "message_type": "custom",
+    "custom": {
+        "type": "interactive",
+        "interactive": {
+            "type": "button",
+            "header": {
+                "type": "text",
+                "text": "Delivery time"
+            },
+            "body": {
+                "text": "Which time would you like us to deliver your order at?"
+            },
+            "footer": {
+                "text": "Please allow 15 mins either side of your chosen time"
+            },
+            "action": {
+                "buttons": [
+                    {
+                        "type": "reply",
+                        "reply": {
+                            "id": "slot-1",
+                            "title": "15:00"
+                        }
+                    },
+                    {
+                        "type": "reply",
+                        "reply": {
+                            "id": "slot-2",
+                            "title": "16:30"
+                        }
+                    },
+                    {
+                        "type": "reply",
+                        "reply": {
+                            "id": "slot-3",
+                            "title": "17:15"
+                        }
+                    }
+                ]
+            }
+        }
+    }
+}
