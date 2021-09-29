@@ -54,11 +54,10 @@ app.post('/greeting', (req, res) => {
   if (req.body.phone && req.body.id) phoneIDs.push(req.body);
   let phone = req.body.phone;
   phoneNumber = phone.replace('+', '');
-  ID = req.body.id
+  ID = req.body.id;
 
   registerWA(phoneNumber, url, 'incoming', waNumber);
-  var textToSend =
-    "Hello, I'm Sierra, the virtual shopping assitant. I can help you when we have new designs available. If you don't want to hear from me again, just select or type LEAVE, otherwise type STAY";
+  var textToSend = "Hello, I'm Sierra, the virtual shopping assitant. I can help you when we have new designs available. If you don't want to hear from me again, just select or type LEAVE, otherwise type STAY";
   sendGreeting(req, res, textToSend);
   // name of channel
   var channel = 'greeting';
@@ -73,7 +72,6 @@ app.post('/greeting', (req, res) => {
 
 app.post('/inbound', (req, res) => {
   console.log('🗞️  inbound', req.body);
-
   var text;
   var reply;
   let replyAddress;
@@ -83,6 +81,8 @@ app.post('/inbound', (req, res) => {
     reply = req.body.text;
     // ELSE IF BUTTON OR LIST IS SELECTED
   } else if (req.body.message_type === 'reply') {
+    console.log('got here')
+    res.sendStatus(200).end()
     reply = req.body.reply.title; // LEAVE
     if (req.body.reply.description) {
       replyAddress = req.body.reply.description;
@@ -133,6 +133,7 @@ app.post('/inbound', (req, res) => {
           });
           break;
         case 'LEAVE':
+          console.log('got here .')
           textToSend =
             'Sorry to see you leave. You can visit Vonage-Shopping.com to opt into the virtual assistant again. Good Bye!';
           sendText(req, res, textToSend);
@@ -261,9 +262,6 @@ app.post('/inbound', (req, res) => {
       }
     }
   }
-  // when demo has completed removeRegWA
-  // removeRegWA(phoneNumber, url, 'incoming');
-  // res.status(200).end(); // Cannot set headers after they are sent to the client (Because in sendMessage has res.send(data))
 });
 
 app.post('/webhooks/status', (req, res) => {
