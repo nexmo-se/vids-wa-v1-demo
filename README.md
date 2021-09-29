@@ -24,7 +24,7 @@ npm run dev
 [pusher-js](https://www.npmjs.com/package/pusher-js)
 [puhser](https://www.npmjs.com/package/pusher)
 
-### UI Notes
+### Timeline UI Notes
 
 Color:
 
@@ -33,9 +33,10 @@ Color:
 
 Variant:
 
-- outlined
-- default
+- outlined = clear
+- default = solid
 
+Example
 ```js
 <TimelineDot color="primary | secondary" variant="outlined | default">
   <Face />
