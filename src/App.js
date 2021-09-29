@@ -4,7 +4,7 @@ import Layout from './components/Layout';
 function App() {
   return (
     <div className="App">
-      <h1>WhatsApp Interactive Messages Demo</h1>
+      <h1>WhatsApp Interactive Messages</h1>
       <Layout />
     </div>
   );

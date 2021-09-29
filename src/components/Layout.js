@@ -628,6 +628,8 @@ function Layout() {
                 allow businesses to offer a way to streamline the interactions
                 with the users, <br></br>increasing the response rates and the
                 number of conversions by means of List Messages and Reply Button
+
+                Demonstrating WhatsApp interactive messages with a virtual shopping assistant and customer
               </Typography>
             </Paper>
           </Grid>

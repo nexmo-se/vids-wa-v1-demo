@@ -3,7 +3,9 @@
 
 Early 2021 Facebook added a new feature in WhatsApp for Business: Interactive Messages.
 These new features allow businesses to offer a way to streamline the interactions with the users,
-increasing the response rates and the number of conversions by means of List Messages and Reply Button
+increasing the response rates and the number of conversions by means of List Messages and Reply Button.
+
+This Demo features the new WhatsApp Interactive Messages for a Retail use case.
 
 > A [Live Demo](https://vids.vonage.com/#/VIDS?id=74) of this application is located inside of Vonage Vids along with other **Vonage API Reference Applications**.
 
