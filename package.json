@@ -4,11 +4,12 @@
   "description": "",
   "private": true,
   "proxy": "http://localhost:5000/",
+  "homepage": "https://vids.vonage.com/wav1",
   "main": "src/server.js",
   "scripts": {
     "server": "nodemon server.js",
     "client": "npm start",
-    "dev": "concurrently -k \"npm run server\" \"npm run client\"",
+    "dev": "npm run server && npm run client",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

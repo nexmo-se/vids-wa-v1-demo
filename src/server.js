@@ -3,15 +3,13 @@ let express = require('express');
 let cookieParser = require('cookie-parser');
 let logger = require('morgan');
 const Pusher = require('pusher');
-// const { v4: uuidv4 } = require('uuid');
-
 let app = express();
-let port = 5000;
+let port = 8046;
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static('public'));
+app.use('/', express.static('build'));
 app.use('/images', express.static('images'));
 const { registerWA, removeRegWA } = require('./register');
 const {
@@ -25,8 +23,8 @@ const {
 const { getCoordinate, getOneCoordinate } = require('./coordinate');
 
 var phoneNumber = '';
-const baseURL = 'https://kittphi.ngrok.io';
-const url = 'https://kittphi.ngrok.io/inbound';
+const baseURL = 'https://vids.vonage.com/wav1'; 
+const url = 'https://vids.vonage.com/wav1/inbound';
 const waNumber = '12019758605';
 
 const pusher = new Pusher({
@@ -37,16 +35,8 @@ const pusher = new Pusher({
   useTLS: process.env.PUSHER_USE_TLS,
 });
 
-// var pushData = [];
 var phoneIDs = [];
 var ID = ''
-
-function matchID(id) {
-  for (const property in phoneIDs) {
-    console.log(`${property}: ${phoneIDs[property]}`);
-    if (id === property) return phoneIDs[property]
-  }
-}
 
 app.post('/greeting', (req, res) => {
   console.log('req.body', req.body); // { phone: '+15754947093', id: 'a62c1a6f-e4cb-4fb1-ac39-239f5fbe8fb3' }
@@ -123,7 +113,6 @@ app.post('/inbound', (req, res) => {
         case 'Hello':
           textToSend =
             "Hello, I'm the Virtual Shopping Assitant. Would you like to hear about our new items? If not, select LEAVE, otherwise select STAY";
-          // sendGreeting(req, res, textToSend); // CAUSES ERROR
           res.status(200).end();
           pusher.trigger('inbound', ID, {
             pushData: {
@@ -261,9 +250,6 @@ app.post('/inbound', (req, res) => {
       }
     }
   }
-  // when demo has completed removeRegWA
-  // removeRegWA(phoneNumber, url, 'incoming');
-  // res.status(200).end(); // Cannot set headers after they are sent to the client (Because in sendMessage has res.send(data))
 });
 
 app.post('/webhooks/status', (req, res) => {
@@ -278,7 +264,6 @@ app.post('/webhooks/event', (req, res) => {
 });
 
 app.get('/webhooks/delivery-receipt', (req, res) => {
-  // console.log('event', req.body);
   res.status(200).end();
 });
 

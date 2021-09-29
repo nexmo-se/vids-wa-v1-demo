@@ -3,7 +3,9 @@ var jwt = require('jsonwebtoken');
 var base64 = require('js-base64');
 var axios = require('axios');
 
-var privateKey = process.env.PRIVATE_KEY;
+// var privateKey = process.env.PRIVATE_KEY;
+// NEEDED STRING HERE TO WORK
+var privateKey = "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASC"
 var current = Date.now();
 
 function sendGreeting(req, res, textToSend) {
@@ -60,10 +62,9 @@ function sendGreeting(req, res, textToSend) {
       } else {
         console.log('\n💀 Unable to fetch token, token:', err);
       }
-      // REQUEST TO VONAGE
       var config = {
         method: 'post',
-        url: 'https://api.nexmo.com/v1/messages', // 'You did not provide correct credentials.', // Fixed by setting PrivateKey to string and adding \n
+        url: 'https://api.nexmo.com/v1/messages', 
         headers: {
           Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json',
@@ -77,9 +78,8 @@ function sendGreeting(req, res, textToSend) {
           console.log('✅ ', JSON.stringify(response.data));
           var data = [];
           data.push(response.data);
-          // setResponse(res.data[0].message_uuid);
-          console.log(data); // {message_uuid: "1234"}
-          // {{data: [{message_uuid: "1234"}]},{body: {id: "uuid", phone: "+15754947093"}}}
+
+          console.log(data);
           res.send({data, body}); 
         })
         .catch(function (error) {
@@ -145,7 +145,7 @@ function lightOrDark(req, res, textToSend) {
       // REQUEST TO VONAGE
       var config = {
         method: 'post',
-        url: 'https://api.nexmo.com/v1/messages', // 'You did not provide correct credentials.', // Fixed by setting PrivateKey to string and adding \n
+        url: 'https://api.nexmo.com/v1/messages', 
         headers: {
           Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json',
@@ -159,7 +159,6 @@ function lightOrDark(req, res, textToSend) {
           console.log('✅ ', JSON.stringify(response.data));
           var data = [];
           data.push(response.data);
-          // console.log(data[0].message_uuid);
           res.send(data);
         })
         .catch(function (error) {
@@ -245,7 +244,7 @@ function sendListShade(req, res, textToSend) {
       // REQUEST TO VONAGE
       var config = {
         method: 'post',
-        url: 'https://api.nexmo.com/v1/messages', // 'You did not provide correct credentials.', // Fixed by setting PrivateKey to string and adding \n
+        url: 'https://api.nexmo.com/v1/messages',
         headers: {
           Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json',
@@ -259,7 +258,6 @@ function sendListShade(req, res, textToSend) {
           console.log('✅ ', JSON.stringify(response.data));
           var data = [];
           data.push(response.data);
-          // console.log(data[0].message_uuid);
           res.send(data);
         })
         .catch(function (error) {
@@ -283,7 +281,6 @@ function sendBtnImage(req, res, textToSend, baseURL) {
         header: {
           type: 'image',
           image: {
-            // link: 'https://cdn.shopify.com/s/files/1/1368/3463/products/PACIFICBLUECREWCURVE-HEM2.jpg?v=1627512351',
             link: `${baseURL}/images/${textToSend}600x600.png`,
           },
         },
@@ -336,7 +333,7 @@ function sendBtnImage(req, res, textToSend, baseURL) {
       // REQUEST TO VONAGE
       var config = {
         method: 'post',
-        url: 'https://api.nexmo.com/v1/messages', // 'You did not provide correct credentials.', // Fixed by setting PrivateKey to string and adding \n
+        url: 'https://api.nexmo.com/v1/messages', 
         headers: {
           Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json',
@@ -350,7 +347,6 @@ function sendBtnImage(req, res, textToSend, baseURL) {
           console.log('✅ ', JSON.stringify(response.data));
           var data = [];
           data.push(response.data);
-          // console.log(data[0].message_uuid);
           res.send(data);
         })
         .catch(function (error) {
@@ -386,7 +382,7 @@ function sendText(req, res, textToSend) {
       // REQUEST TO VONAGE
       var config = {
         method: 'post',
-        url: 'https://api.nexmo.com/v1/messages', // 'You did not provide correct credentials.', // Fixed by setting PrivateKey to string and adding \n
+        url: 'https://api.nexmo.com/v1/messages', 
         headers: {
           Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json',
@@ -458,16 +454,6 @@ function sendLocationList(req, res, coordinates) {
                 },
               ],
             },
-            // {
-            //   title: 'Select to Exit',
-            //   rows: [
-            //     {
-            //       id: 'address5',
-            //       title: 'Exit',
-            //       description: 'Close this list',
-            //     },
-            //   ],
-            // },
           ],
         },
       },
@@ -491,7 +477,7 @@ function sendLocationList(req, res, coordinates) {
       // REQUEST TO VONAGE
       var config = {
         method: 'post',
-        url: 'https://api.nexmo.com/v1/messages', // 'You did not provide correct credentials.', // Fixed by setting PrivateKey to string and adding \n
+        url: 'https://api.nexmo.com/v1/messages', 
         headers: {
           Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json',
@@ -505,8 +491,6 @@ function sendLocationList(req, res, coordinates) {
           console.log('✅ ', JSON.stringify(response.data));
           var data = [];
           data.push(response.data);
-          // console.log(data[0].message_uuid);
-          // res.send(data);
         })
         .catch(function (error) {
           console.log(error);
@@ -549,7 +533,7 @@ function sendLocation(req, res, address, lat, lon) {
       // REQUEST TO VONAGE
       var config = {
         method: 'post',
-        url: 'https://api.nexmo.com/v1/messages', // 'You did not provide correct credentials.', // Fixed by setting PrivateKey to string and adding \n
+        url: 'https://api.nexmo.com/v1/messages',
         headers: {
           Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json',
@@ -563,8 +547,6 @@ function sendLocation(req, res, address, lat, lon) {
           console.log('✅ ', JSON.stringify(response.data));
           var data = [];
           data.push(response.data);
-          // console.log(data[0].message_uuid);
-          // res.send(data);
         })
         .catch(function (error) {
           console.log(error);
