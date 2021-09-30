@@ -45,7 +45,7 @@ increasing the response rates and the number of conversions by means of List Mes
 <!-- DEMO VIDEO GIF HERE -->
 
 <p align="center">
-<img src="images/short-demo.gif" alt="Sample signal" width="100%" height="100%">
+<img src="images/shortest-demo.gif" alt="Sample signal" width="100%" height="100%">
 </p>
 
 This application features the 
