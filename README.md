@@ -43,7 +43,6 @@ WhatsApp interactive messages with a virtual shopping assistant and customer
 
 > A [Live Demo](https://vids.vonage.com/#/VIDS?id=74) of this application is located inside of Vonage Vids along with other **Vonage API Reference Applications**.
 
-
 <!-- The script tag should live in the head of your page if at all possible -->
 <script type="text/javascript" async src="https://play.vidyard.com/embed/v4.js"></script>
 
@@ -56,6 +55,7 @@ WhatsApp interactive messages with a virtual shopping assistant and customer
   data-v="4"
   data-type="inline"
 />
+
 
 <br>
 
