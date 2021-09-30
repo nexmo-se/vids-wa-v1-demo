@@ -45,7 +45,7 @@ increasing the response rates and the number of conversions by means of List Mes
 <!-- DEMO VIDEO GIF HERE -->
 
 <p align="center">
-<img src="images/shortest-demo.gif" alt="Sample signal" width="100%" height="100%">
+<img src="images/shortest-demo.gif" alt="Sample signal" width="75%" height="75%">
 </p>
 
 This application features the 
@@ -80,7 +80,7 @@ WhatsApp interactive messages with a virtual shopping assistant and customer
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
 <!-- SETUP -->
-## <div align="center">⚙️ Setup</div>
+## <div align="center">⚙️ Setup 🚀</div>
 
 #### <div align="center">👇 The Steps below are required for Local Development 👇</div>
 
