@@ -34,6 +34,7 @@
 </div>
 
 <br>
+
 WhatsApp for Business: Interactive Messages are features that allow businesses to offer a way to streamline the interactions with the users,
 increasing the response rates and the number of conversions by means of List Messages and Reply Button. 
 
@@ -41,6 +42,23 @@ This application features the
 WhatsApp interactive messages with a virtual shopping assistant and customer
 
 > A [Live Demo](https://vids.vonage.com/#/VIDS?id=74) of this application is located inside of Vonage Vids along with other **Vonage API Reference Applications**.
+
+
+<!-- The script tag should live in the head of your page if at all possible -->
+<script type="text/javascript" async src="https://play.vidyard.com/embed/v4.js"></script>
+
+<!-- Put this wherever you would like your player to appear -->
+<img
+  style="width: 100%; margin: auto; display: block;"
+  class="vidyard-player-embed"
+  src="https://play.vidyard.com/G3N9FY2V8TM72uBMfn6w1i.jpg"
+  data-uuid="G3N9FY2V8TM72uBMfn6w1i"
+  data-v="4"
+  data-type="inline"
+/>
+
+<br>
+
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
@@ -75,14 +93,14 @@ WhatsApp interactive messages with a virtual shopping assistant and customer
 <!-- SETUP -->
 ## <div align="center">⚙️ Setup 🚀</div>
 
-<div align="center">👇 The Steps below are required for Local Development 👇</div>
+#### <div align="center">👇 The Steps below are required for Local Development 👇</div>
 
 
 
-1. <span style="color:orange">Prerequisites</span> `Must all be completed for App to work.`
+1. <span style="color:orange">Prerequisites</span>
     - Must have a **Vonage Account**
     - WhatsApp:
-        - ❌ Don't do this: 👉   Use **Vonage Sandbox**. As of Sept 29, 2021, Sandbox does not support Messages V1 [[^1]](https://confluence.vonage.com/display/MSG/Messages+API+V1+-+Technical+Guide).
+        - ❌ Don't do this: 👉   Use **Vonage Sandbox**. As of Sept 29, 2021, Sandbox does not support Messages V1 [[^]](https://confluence.vonage.com/display/MSG/Messages+API+V1+-+Technical+Guide).
         - ✅ Do this: 👉 WhatsApp Business Account and Number.
     - Once you have a WhatsApp Account and Number, you'll then need to [make a Vonage App](helpers/make-app.sh).
     - This Demo using a **Geo.Codes** to get Latitude/Longitude for input address. You'll need a [Geo.Codes Account](https://geo.codes/) to obtain an API-Key
@@ -100,7 +118,7 @@ WhatsApp interactive messages with a virtual shopping assistant and customer
     ngrok http 5000
     ```
 
-    Rename the provided env-example and populate with your credentials.
+    Rename the provided `env-example` to `.env` and populate with your credentials.
     ```bash
     mv env-example .env
     ```
@@ -115,9 +133,9 @@ WhatsApp interactive messages with a virtual shopping assistant and customer
     npm install nodemon concurrently --save-dev
     ```
 
-    To run both backend and frontend concurrently
+    ✨ Setup completed ✨ Now your ready to run frontend/backend concurrently
     ```bash
-    ✨ npm run dev ✨
+    npm run dev
     ```
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
