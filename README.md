@@ -47,6 +47,8 @@ WhatsApp interactive messages with a virtual shopping assistant and customer
 <script type="text/javascript" async src="https://play.vidyard.com/embed/v4.js"></script>
 
 <!-- Put this wherever you would like your player to appear -->
+<a href="https://play.vidyard.com/embed/v4.js">
+
 <img
   style="width: 100%; margin: auto; display: block;"
   class="vidyard-player-embed"
@@ -55,7 +57,7 @@ WhatsApp interactive messages with a virtual shopping assistant and customer
   data-v="4"
   data-type="inline"
 />
-
+</a>
 
 <br>
 
@@ -169,6 +171,6 @@ WhatsApp interactive messages with a virtual shopping assistant and customer
 
 - [Kitt.Phi@Vonage.com](mailto:kitt.phi@vonage.com?subject=[GitHub]%20Source%20Han%20Sans)
 
-<!-- <p align="center">
-<img src="images/VonageSpinner.gif" alt="Sample signal" width="10%" height="10%">
-</p> -->
+<p align="center">
+<img src="images/test.mkv" alt="Sample signal" width="10%" height="10%">
+</p>
