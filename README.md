@@ -54,7 +54,7 @@ WhatsApp interactive messages with a virtual shopping assistant and customer
 > A [Live Demo](https://vids.vonage.com/#/VIDS?id=74) of this application is located inside of Vonage Vids along with other **Vonage API Reference Applications**.
 
 <!-- TABLE OF CONTENTS -->
-## <center>📖 Table of Contents</center>
+## <div align="center">📖 Table of Contents</div>
 
 <div align="center">
     <h3>
@@ -130,7 +130,7 @@ WhatsApp interactive messages with a virtual shopping assistant and customer
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
 <!-- HELPFUL LINKS -->
-## <center>🔎 Helpful Links</center>
+## <div align="center">🔎 Helpful Links</div>
 
 - [Facebook WhatsApp Messages](https://developers.facebook.com/docs/whatsapp/api/messages)
 - [Vonage Confluence WhatsApp Features](https://confluence.vonage.com/display/MSG/WhatsApp+Features#WhatsAppFeatures-Buttonmessages)
@@ -140,7 +140,7 @@ WhatsApp interactive messages with a virtual shopping assistant and customer
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
 <!-- LIBRARIES USED -->
-## <center>📚 Libraries Used</center>
+## <div align="center">📚 Libraries Used</div>
 
 - [Create React App](https://reactjs.org/docs/create-a-new-react-app.html)
 - [Material UI](https://material-ui.com/getting-started/installation/)
@@ -152,7 +152,7 @@ WhatsApp interactive messages with a virtual shopping assistant and customer
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
 <!-- GETTING HELP -->
-## <center>📥 Getting Help</center>
+## <div align="center">📥 Getting Help</div>
 
 - [Kitt.Phi@Vonage.com](mailto:kitt.phi@vonage.com?subject=[GitHub]%20Source%20Han%20Sans)
 
