@@ -1,6 +1,10 @@
+
+
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
 # <div align="center">WhatsApp Interactive Messages Vids Demo</div>
+
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
 
 <div align='center'>
@@ -32,42 +36,25 @@
 </a>
   
 </div>
-
 <br>
 
 WhatsApp for Business: Interactive Messages are features that allow businesses to offer a way to streamline the interactions with the users,
 increasing the response rates and the number of conversions by means of List Messages and Reply Button. 
+
+
+<!-- DEMO VIDEO GIF HERE -->
+
+<p align="center">
+<img src="images/short-demo.gif" alt="Sample signal" width="100%" height="100%">
+</p>
 
 This application features the 
 WhatsApp interactive messages with a virtual shopping assistant and customer
 
 > A [Live Demo](https://vids.vonage.com/#/VIDS?id=74) of this application is located inside of Vonage Vids along with other **Vonage API Reference Applications**.
 
-<!-- The script tag should live in the head of your page if at all possible -->
-<script type="text/javascript" async src="https://play.vidyard.com/embed/v4.js"></script>
-
-<!-- Put this wherever you would like your player to appear -->
-<a href="https://play.vidyard.com/embed/v4.js">
-
-<img
-  style="width: 100%; margin: auto; display: block;"
-  class="vidyard-player-embed"
-  src="https://play.vidyard.com/G3N9FY2V8TM72uBMfn6w1i.jpg"
-  data-uuid="G3N9FY2V8TM72uBMfn6w1i"
-  data-v="4"
-  data-type="inline"
-/>
-</a>
-
-<br>
-
-
-![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
-
-
-
 <!-- TABLE OF CONTENTS -->
-### <center>📖 Table of Contents</center>
+## <center>📖 Table of Contents</center>
 
 <div align="center">
     <h3>
@@ -93,7 +80,7 @@ WhatsApp interactive messages with a virtual shopping assistant and customer
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
 <!-- SETUP -->
-## <div align="center">⚙️ Setup 🚀</div>
+## <div align="center">⚙️ Setup</div>
 
 #### <div align="center">👇 The Steps below are required for Local Development 👇</div>
 
@@ -135,16 +122,15 @@ WhatsApp interactive messages with a virtual shopping assistant and customer
     npm install nodemon concurrently --save-dev
     ```
 
-    ✨ Setup completed ✨ Now your ready to run frontend/backend concurrently
+    Now your ready to run frontend/backend concurrently
     ```bash
     npm run dev
     ```
-
+    ✨ Setup is now complete! ✨ 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
 <!-- HELPFUL LINKS -->
-
-## 🔎 Helpful Links
+## <center>🔎 Helpful Links</center>
 
 - [Facebook WhatsApp Messages](https://developers.facebook.com/docs/whatsapp/api/messages)
 - [Vonage Confluence WhatsApp Features](https://confluence.vonage.com/display/MSG/WhatsApp+Features#WhatsAppFeatures-Buttonmessages)
@@ -154,7 +140,7 @@ WhatsApp interactive messages with a virtual shopping assistant and customer
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
 <!-- LIBRARIES USED -->
-## 📚 Libraries Used
+## <center>📚 Libraries Used</center>
 
 - [Create React App](https://reactjs.org/docs/create-a-new-react-app.html)
 - [Material UI](https://material-ui.com/getting-started/installation/)
@@ -166,11 +152,8 @@ WhatsApp interactive messages with a virtual shopping assistant and customer
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
 <!-- GETTING HELP -->
-
-## 📥 Getting Help
+## <center>📥 Getting Help</center>
 
 - [Kitt.Phi@Vonage.com](mailto:kitt.phi@vonage.com?subject=[GitHub]%20Source%20Han%20Sans)
 
-<p align="center">
-<img src="images/test.mkv" alt="Sample signal" width="10%" height="10%">
-</p>
+<!-- [![Watch the video](https://i.imgur.com/vKb2F1B.png)](https://youtu.be/vt5fpE0bzSY) -->
