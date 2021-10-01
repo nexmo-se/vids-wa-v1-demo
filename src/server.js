@@ -11,6 +11,10 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+// ON EC2 USE: app.use('/', express.static('build'));
+// app.use('/', express.static('build'));
+// INSTEAD OF: app.use(express.static('public'));
 app.use(express.static('public'));
 app.use('/images', express.static('images'));
 const { registerWA, removeRegWA } = require('./register');
@@ -25,6 +29,10 @@ const {
 
 const { getCoordinate, getOneCoordinate } = require('./coordinate');
 
+// ON EC2 THE URLS NEED TO BE SET TO VIDS:
+// const baseURL = 'https://vids.vonage.com/wav1'; 
+// const url = 'https://vids.vonage.com/wav1/inbound';
+
 var phoneNumber = '';
 const baseURL = 'https://kittphi.ngrok.io';
 const url = 'https://kittphi.ngrok.io/inbound';
@@ -38,7 +46,6 @@ const pusher = new Pusher({
   useTLS: process.env.PUSHER_USE_TLS,
 });
 
-// var pushData = [];
 var phoneIDs = [];
 var ID = ''
 
@@ -60,9 +67,6 @@ app.post('/greeting', (req, res) => {
 
   startDemo(req,res);
 
-  // var channel = 'greeting';
-  // var data = { pushData: { state: 1, text: '' } };
-  // pusher.trigger(channel, ID, data);
 });
 
 app.post('/inbound', (req, res) => {

@@ -3,6 +3,7 @@ var jwt = require('jsonwebtoken');
 // var base64 = require('js-base64');
 var axios = require('axios');
 
+// ON EC2 INSTANCE, DOTENV DOES NOT WORK HERE, THE STRING IS NECESSARY WITH /N
 var privateKey = process.env.PRIVATE_KEY;
 var current = Date.now();
 
