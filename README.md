@@ -44,10 +44,6 @@ increasing the response rates and the number of conversions by means of List Mes
 
 <!-- DEMO VIDEO GIF HERE -->
 
-<p align="center">
-<img src="images/shortest-demo.gif" alt="Sample signal" width="75%" height="75%">
-</p>
-
 This application features the 
 WhatsApp interactive messages with a virtual shopping assistant and customer
 
