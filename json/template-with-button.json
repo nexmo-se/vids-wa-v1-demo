@@ -1,0 +1,14 @@
+{
+  [0]   to: '12019758605',
+  [0]   from: '15754947093',
+  [0]   channel: 'whatsapp',
+  [0]   message_uuid: 'c4fedfd6-c50a-4c24-bf0b-4e8bfe6d333f',
+  [0]   timestamp: '2021-10-01T19:44:51Z',
+  [0]   message_type: 'button',
+  [0]   button: { text: 'Start the Demo' },
+  [0]   profile: { name: 'Kitt Phi' },
+  [0]   context: {
+  [0]     message_from: '12019758605',
+  [0]     message_uuid: '75b4c96c-a85b-4a65-a241-b22189de695d'
+  [0]   }
+  [0] }

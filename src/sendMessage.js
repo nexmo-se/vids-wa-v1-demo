@@ -1,40 +1,28 @@
 require('dotenv').config();
 var jwt = require('jsonwebtoken');
-var base64 = require('js-base64');
+// var base64 = require('js-base64');
 var axios = require('axios');
 
 var privateKey = process.env.PRIVATE_KEY;
 var current = Date.now();
 
-function startDemo(req, res, textToSend) {
+function startDemo(req, res) {
+  var body = req.body;
   var data = JSON.stringify({
     from: '12019758605',
-    to: '15754947093',
+    to: req.body.phone,
     channel: 'whatsapp',
     message_type: 'custom',
     custom: {
-      type: 'interactive',
-      interactive: {
-        type: 'button',
-        // header: {
-        //   type: 'text',
-        //   text: 'Header text goes here',
-        // },
-        body: {
-          text: "Welcome to the WhatsApp Interactive Messages demo! If you respond by typing ANY message, or press the button, the demo will begin",
-        },
-        action: {
-          buttons: [
-            {
-              type: 'reply',
-              reply: {
-                id: 'slot-1',
-                title: 'Start the Demo',
-              },
-            },
-          ],
-        },
-      },
+      type: 'template',
+      template: {
+        namespace: "9b6b4fcb_da19_4a26_8fe8_78074a91b584",
+        name: "vids_interactive_demo",
+        language: {
+          policy: "deterministic",
+          code: "en"
+        }
+      }
     },
   });
 
@@ -50,7 +38,7 @@ function startDemo(req, res, textToSend) {
       if (token) {
         console.log('\n✅ Received token\n', token);
       } else {
-        console.log('\n💀 Unable to fetch token, token:', err);
+        console.log('\n💀 Unable to fetch token, error:', err);
       }
       var config = {
         method: 'post',
@@ -65,7 +53,12 @@ function startDemo(req, res, textToSend) {
 
       axios(config)
         .then(function (response) {
-          console.log('\n✅ ', JSON.stringify(response.data));
+          console.log('✅ ', JSON.stringify(response.data));
+          var data = [];
+          data.push(response.data);
+
+          console.log('🗞️  Sending to frontend Data:', data, ' and Body: ', body)
+          res.status(200).send({data, body}); 
         })
         .catch(function (error) {
           console.log(error);
@@ -76,10 +69,11 @@ function startDemo(req, res, textToSend) {
 }
 
 function sendGreeting(req, res, textToSend) {
+  console.log('sendGreeting req.body:', req.body)
   var body = req.body;
   var data = JSON.stringify({
-    from: '12019758605', // 12019758605
-    to: req.body.phone, // 15754947093
+    from: '12019758605',
+    to: req.body.from,
     channel: 'whatsapp',
     message_type: 'custom',
     custom: {
@@ -146,10 +140,9 @@ function sendGreeting(req, res, textToSend) {
           console.log('✅ ', JSON.stringify(response.data));
           var data = [];
           data.push(response.data);
-          // setResponse(res.data[0].message_uuid);
-          console.log(data); // {message_uuid: "1234"}
-          // {{data: [{message_uuid: "1234"}]},{body: {id: "uuid", phone: "+15754947093"}}}
-          res.send({data, body}); 
+
+          // {{data: [{message_uuid: "1234"}]},{body: {id: "uuid", phone: "+"}}}
+          res.status(200).send({data, body}); 
         })
         .catch(function (error) {
           console.log(error);
@@ -229,7 +222,7 @@ function lightOrDark(req, res, textToSend) {
           var data = [];
           data.push(response.data);
           // console.log(data[0].message_uuid);
-          res.send(data);
+          res.status(200).send(data);
         })
         .catch(function (error) {
           console.log(error);
@@ -329,7 +322,7 @@ function sendListShade(req, res, textToSend) {
           var data = [];
           data.push(response.data);
           // console.log(data[0].message_uuid);
-          res.send(data);
+          res.status(200).send(data);
         })
         .catch(function (error) {
           console.log(error);
@@ -420,7 +413,7 @@ function sendBtnImage(req, res, textToSend, baseURL) {
           var data = [];
           data.push(response.data);
           // console.log(data[0].message_uuid);
-          res.send(data);
+          res.status(200).send(data);
         })
         .catch(function (error) {
           console.log(error);
@@ -452,10 +445,9 @@ function sendText(req, res, textToSend) {
       } else {
         console.log('\n💀 Unable to fetch token, token:', err);
       }
-      // REQUEST TO VONAGE
       var config = {
         method: 'post',
-        url: 'https://api.nexmo.com/v1/messages', // 'You did not provide correct credentials.', // Fixed by setting PrivateKey to string and adding \n
+        url: 'https://api.nexmo.com/v1/messages',
         headers: {
           Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json',
@@ -470,7 +462,7 @@ function sendText(req, res, textToSend) {
           var data = [];
           data.push(response.data);
           // console.log(data[0].message_uuid);
-          res.send(data);
+          res.status(200).send(data);
         })
         .catch(function (error) {
           console.log(error);
