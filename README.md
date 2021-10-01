@@ -92,8 +92,8 @@ WhatsApp interactive messages with a virtual shopping assistant and customer
         - ❌ Don't do this: 👉   Use **Vonage Sandbox**. As of Sept 29, 2021, Sandbox does not support Messages V1 [[^]](https://confluence.vonage.com/display/MSG/Messages+API+V1+-+Technical+Guide).
         - ✅ Do this: 👉 WhatsApp Business Account and Number.
     - Once you have a WhatsApp Account and Number, you'll then need to [make a Vonage App](helpers/make-app.sh).
-    - This Demo using a **Geo.Codes** to get Latitude/Longitude for input address. You'll need a [Geo.Codes Account](https://geo.codes/) to obtain an API-Key
-    - The Demo uses **Pusher** to allow the backend to listen for `/inbound` webhook and pass it to the Frontend to update the UI. You'll need a [Pusher Account](https://pusher.com/)
+    - This Demo uses **Geo.Codes** to get Latitude/Longitude for addresses. You'll need a [Geo.Codes Account](https://geo.codes/) to obtain an API-Key
+    - The Demo uses **Pusher** to allow the backend to listen on the`/inbound` webhook and pass it to the frontend to update the UI. You'll need a [Pusher Account](https://pusher.com/).
 
 2. <span style="color:orange">Setup Local Development</span>
 
