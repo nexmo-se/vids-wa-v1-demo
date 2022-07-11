@@ -17,8 +17,7 @@ import Typography from '@material-ui/core/Typography';
 import 'react-phone-number-input/style.css';
 import PhoneInput from 'react-phone-number-input';
 import Pusher from 'pusher-js';
-import MapContainer from './Map';
-
+import { GoogleApiWrapper } from 'google-maps-react';
 const useStyles = makeStyles((theme) => ({
   paper: {
     padding: theme.spacing(1),
@@ -721,10 +720,6 @@ function Layout() {
                           </p>
                         ))}
                       </>
-                    ) : null}
-
-                    {pusherData.location ? (
-                      <MapContainer location={pusherData.location} />
                     ) : null}
                     {/* {whatsapp.map((item, index) => {
                       return (

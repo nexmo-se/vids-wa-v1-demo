@@ -1,0 +1,10 @@
+🗞️  /inbound req.body: {
+32|wav1    |   to: '12019758605',
+32|wav1    |   from: '15754947093',
+32|wav1    |   channel: 'whatsapp',
+32|wav1    |   message_uuid: 'fcfc8ff4-51f9-4122-b163-a2abc92e5339',
+32|wav1    |   timestamp: '2022-06-07T03:34:19Z',
+32|wav1    |   message_type: 'location',
+32|wav1    |   location: { lat: 33.72581481933594, long: -117.97148895263672 },
+32|wav1    |   profile: { name: 'Kitt Phi' }
+32|wav1    | }

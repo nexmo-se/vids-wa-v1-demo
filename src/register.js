@@ -34,10 +34,10 @@ async function registerWA(phone, url, type = 'incoming', waNumber) {
 }
 
 // STEP_1: Register TO_NUMBER and NGROK "Inbound" Webhook
-// let phone = '15754947093';
-// let url = 'https://kittphi.ngrok.io/webhooks/inbound';
-// let waNumber = '12019758605';
-// registerWA(phone, url, 'incoming', waNumber);
+let phone = '15754947093';
+let url = 'https://techguy.ngrok.io/webhooks/inbound';
+let waNumber = '12019758605';
+registerWA(phone, url, 'incoming', waNumber);
 
 /**
  * To Remove Redirection Number and URL

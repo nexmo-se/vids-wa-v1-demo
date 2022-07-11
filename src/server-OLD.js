@@ -6,12 +6,16 @@ const Pusher = require('pusher');
 // const { v4: uuidv4 } = require('uuid');
 
 let app = express();
-let port = 8046;
+let port = 5001;
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use('/', express.static('build'));
+
+// ON EC2 USE: app.use('/', express.static('build'));
+// app.use('/', express.static('build'));
+// INSTEAD OF: app.use(express.static('public'));
+app.use(express.static('public'));
 app.use('/images', express.static('images'));
 const { registerWA, removeRegWA } = require('./register');
 const {
@@ -25,10 +29,14 @@ const {
 
 const { getCoordinate, getOneCoordinate } = require('./coordinate');
 
+// ON EC2 THE URLS NEED TO BE SET TO VIDS:
+// const baseURL = 'https://vids.vonage.com/wav1'; 
+// const url = 'https://vids.vonage.com/wav1/inbound';
+
 var phoneNumber = '';
+const baseURL = 'https://kittphi.ngrok.io';
+const url = 'https://kittphi.ngrok.io/inbound';
 const waNumber = '12019758605';
-const baseURL = 'https://vids.vonage.com/wav1';
-const url = 'https://vids.vonage.com/wav1/inbound';
 
 const pusher = new Pusher({
   appId: process.env.PUSHER_APP_ID,
@@ -38,14 +46,13 @@ const pusher = new Pusher({
   useTLS: process.env.PUSHER_USE_TLS,
 });
 
-// var pushData = [];
 var phoneIDs = [];
-var ID = '';
+var ID = ''
 
 function matchID(id) {
   for (const property in phoneIDs) {
     console.log(`${property}: ${phoneIDs[property]}`);
-    if (id === property) return phoneIDs[property];
+    if (id === property) return phoneIDs[property]
   }
 }
 
@@ -58,11 +65,8 @@ app.post('/greeting', (req, res) => {
 
   registerWA(phoneNumber, url, 'incoming', waNumber);
 
-  startDemo(req, res);
+  startDemo(req,res);
 
-  // var channel = 'greeting';
-  // var data = { pushData: { state: 1, text: '' } };
-  // pusher.trigger(channel, ID, data);
 });
 
 app.post('/inbound', (req, res) => {
@@ -72,24 +76,20 @@ app.post('/inbound', (req, res) => {
   let replyAddress;
   // IF ADDRESS IS INPUTED OR TEXT e.g. ANY
   if (req.body.message_type === 'text') {
-    console.log('got text:', req.body.text);
+    console.log('got text:', req.body.text)
     // assign text for switch case
     text = req.body.text;
     reply = req.body.text;
     // res.status(200).end();
-  } else if (req.body.message_type === 'location') {
-    console.log('got location', req.body.location);
-    text = req.body.location;
-    reply = 'location';
-    // IF TEMPLATE BUTTON
+  // IF TEMPLATE BUTTON
   } else if (req.body.message_type === 'button') {
-    console.log('got button', req.body.button.text);
+    console.log('got button', req.body.button.text)
     // assign text for switch case
     reply = req.body.button.text;
-
+  
     // ELSE IF INTERACTIVE BUTTON OR LIST IS SELECTED
   } else if (req.body.message_type === 'reply') {
-    console.log('got reply:', req.body.reply.title);
+    console.log('got reply:', req.body.reply.title)
     // res.status(200).end();
     reply = req.body.reply.title; // LEAVE
     if (req.body.reply.description) {
@@ -102,20 +102,20 @@ app.post('/inbound', (req, res) => {
   }
 
   // IF VALID ADDRESS IS ENTERED with Format E.g: 123 Main St Boston, MA 01850
-  if (req.body.message_type === 'location') {
-    console.log('✅ User shared location', req.body.location);
-    getCoordinate(req, res);
+  if (/\d+ ([^,]+), ([A-Z]{2}) (\d{5})/.test(text)) {
+    console.log('✅ Valid address to compare');
+    getCoordinate(req, res, text);
     pusher.trigger('inbound', ID, {
       pushData: {
         state: 6,
-        location: req.body.location,
+        text: req.body.text,
       },
     });
     res.status(200).end();
 
     // ELSE IF IS A REPLY AND ADDRESS SELECTED FROM LIST HAS ZIPCODE
   } else if (reply && /(\d{5})/.test(replyAddress)) {
-    console.log('✅ Reply Address Selected - req.body', req.body);
+    console.log('✅ Valid address');
     getOneCoordinate(req, res, replyAddress);
     pusher.trigger('inbound', ID, {
       pushData: {
@@ -123,18 +123,19 @@ app.post('/inbound', (req, res) => {
         text: req.body.reply.title,
       },
     });
-    res.status(200).end();
+    // res.status(200).end();
 
     // HANDLES ALL REPLIES (SELECTIONS OF BUTTONS AND LIST)
   } else {
     var textToSend;
     // IF A SELECTION IS MADE AND NOT VALID ADDRESS FORMAT
-    if (reply || !req.body.message_type === location) {
+    if (reply || !/\d+ ([^,]+), ([A-Z]{2}) (\d{5})/.test(text)) {
+
       switch (reply) {
         case 'ANY':
-          console.log('switch case:', reply);
+          console.log('switch case:', reply)
           textToSend =
-            "Hello, I'm the Virtual Shopping Assistant. Would you like to hear about our new items? If not, select LEAVE, otherwise select STAY";
+            "Hello, I'm the Virtual Shopping Assitant. Would you like to hear about our new items? If not, select LEAVE, otherwise select STAY";
           sendGreeting(req, res, textToSend);
           pusher.trigger('inbound', ID, {
             pushData: {
@@ -144,9 +145,9 @@ app.post('/inbound', (req, res) => {
           });
           break;
         case 'Start the Demo':
-          console.log('switch case:', reply);
+          console.log('switch case:', reply)
           textToSend =
-            "Hello, I'm the Virtual Shopping Assistant. Would you like to hear about our new items? If not, select LEAVE, otherwise select STAY";
+            "Hello, I'm the Virtual Shopping Assitant. Would you like to hear about our new items? If not, select LEAVE, otherwise select STAY";
           sendGreeting(req, res, textToSend);
           pusher.trigger('inbound', ID, {
             pushData: {
@@ -156,7 +157,7 @@ app.post('/inbound', (req, res) => {
           });
           break;
         case 'LEAVE':
-          console.log('got here .');
+          console.log('got here .')
           textToSend =
             'Sorry to see you leave. You can visit Vonage-Shopping.com to opt into the virtual assistant again. Good Bye!';
           sendText(req, res, textToSend);
@@ -240,7 +241,8 @@ app.post('/inbound', (req, res) => {
           });
           break;
         case 'Yes':
-          textToSend = 'Great, Please share your mobile WhatsApp Location';
+          textToSend =
+            'Great, Please type in your address. E.g. 123 Main St Boston, MA 01850';
           sendText(req, res, textToSend);
           pusher.trigger('inbound', ID, {
             pushData: {
@@ -271,12 +273,13 @@ app.post('/inbound', (req, res) => {
           });
           break;
         default:
-          textToSend = 'Sorry, your input was invalid. Please try again.';
+          textToSend =
+            'Sorry, your input was invalid. Please try again.';
           sendText(req, res, textToSend);
           pusher.trigger('inbound', ID, {
             pushData: {
               state: 5,
-              text: 'Sorry, your input was invalid. Please try again',
+              text: "Sorry, your input was invalid. Please try again",
             },
           });
           break;
